@@ -6,10 +6,7 @@ const OBSIDIAN_TAG_REGEX = /#\S.*/g;
 const tagReplacer: [Find, Replace?] = [
   OBSIDIAN_TAG_REGEX,
   function (input) {
-    return u("text", {
-      value: input,
-      class: "breadcrumbs__link",
-    });
+    return u("inlineCode", input);
   },
 ];
 
