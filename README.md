@@ -1,24 +1,22 @@
 # 🗃️ docusaurus-obsidian-bridge
 
-A suite of tools to seamlessly integrate your Obsidian Vault into your Docusaurus website.
+A suite of tools to seamlessly integrate a Obsidian Vault into my Docusaurus website
+
+> [!NOTE]
+> A project meant for my personal [portfolio website](https://chanjunren.github.io)
 
 ## ✨ Features
 
 ### Syntax Transformation (In Progress)
 
-Transform your Obsidian-specific Markdown syntax to work flawlessly in Docusaurus:
-
 - **Internal Links:** Convert `[[link]]` to Docusaurus-friendly internal links.
-- **Admonitions:** Support for callout blocks (notes, warnings, etc.) using the `admonitions` plugin ([javalent/admonitions](https://github.com/javalent/admonitions)).
+- **Admonitions:** Converts obsidian `admonitions` ([javalent/admonitions](https://github.com/javalent/admonitions)) to Docusaurus-friendly admonotions
 - **Callouts:** Integrate callout blocks for highlighted information.
-- **Tags:** Handle Obsidian tags (`#tag`) within your Docusaurus content.
+- **Tags:** Handle Obsidian tags (`#tag`) within your Docusaurus content (??)
 
 ### Graph Visualization (In Progress)
 
-Visually explore the relationships between your notes:
-
-- **Interactive Graph:** Utilize the powerful D3.js library for a dynamic graph visualization of linked notes and notes with shared tags.
-- **Customizable Styling:** Tailor the graph's appearance to seamlessly match your Docusaurus site's theme.
+- **Interactive Graph:** graph visualization of linked notes and notes with shared tags
 - **Filtering & Navigation:** Easily find and explore specific nodes and connections within the graph.
 
 ## 🔧 Installation and Usage
