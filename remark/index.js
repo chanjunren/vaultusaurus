@@ -1,13 +1,9 @@
-import fs from "fs";
-import { retext } from "retext";
-import { reporter } from "vfile-reporter";
-import convertToDocusaurusMdx from "./plugin.js";
+import { findAndReplace } from "mdast-util-find-and-replace";
+import CUSTOM_REPLACERS from "./replacers/custom";
+import OBSIDIAN_REPLACERS from "./replacers/obsidian";
 
-const buffer = fs.readFileSync("tests/test1.md");
-
-retext()
-  .use(convertToDocusaurusMdx)
-  .process(buffer)
-  .then((file) => {
-    console.error(reporter(file));
-  });
+export default function convertToDocusaurusMdx() {
+  return async (tree) => {
+    findAndReplace(tree, [...CUSTOM_REPLACERS, ...OBSIDIAN_REPLACERS]);
+  };
+}
