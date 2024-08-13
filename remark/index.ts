@@ -7,8 +7,6 @@ import OBSIDIAN_REPLACERS from "./replacers/obsidian/index.js";
 
 export default function convertToDocusaurusMdx() {
   return async (tree: Nodes) => {
-    console.log("DOCCIE");
-    console.log(JSON.stringify(tree));
     findAndReplace(tree, [...CUSTOM_REPLACERS, ...OBSIDIAN_REPLACERS]);
 
     return map(tree, admonitionMapper);
