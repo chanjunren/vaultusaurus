@@ -12,11 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "@types/mdast": "^4.0.4",
+    "@types/unist": "^3.0.2",
     "mdast-util-find-and-replace": "^3.0.1",
     "retext": "^9.0.0",
     "ts-node": "^10.9.2",
     "unist-builder": "^4.0.0",
     "unist-util-inspect": "^8.1.0",
+    "unist-util-map": "^4.0.0",
     "vfile-reporter": "^8.1.1"
   },
   "devDependencies": {
