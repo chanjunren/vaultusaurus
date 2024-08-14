@@ -1,7 +1,7 @@
 {
-  "name": "remark",
+  "name": "@chanjunren/remark-docusaurus-obsidian-bridge",
   "version": "1.0.0",
-  "description": "",
+  "description": "Utility for rendering obsidian components on a docusaurus website",
   "main": "index.ts",
   "type": "module",
   "keywords": [],
