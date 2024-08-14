@@ -1,18 +1,22 @@
 {
-  "name": "@chanjunren/remark-docusaurus-obsidian-bridge",
+  "name": "remark-docusaurus-obsidian-bridge",
   "version": "1.0.0",
   "description": "Utility for rendering obsidian components on a docusaurus website",
   "main": "index.ts",
   "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "remark",
+    "docusaurus",
+    "obsidian",
+    "mdast"
+  ],
+  "author": "chanjunren",
+  "license": "MIT",
   "dependencies": {
     "@types/mdast": "^4.0.4",
     "@types/unist": "^3.0.2",
     "mdast-util-find-and-replace": "^3.0.1",
     "unist-builder": "^4.0.0",
-    "unist-util-inspect": "^8.1.0",
     "unist-util-map": "^4.0.0",
     "mdast-util-from-markdown": "^2.0.1"
   },

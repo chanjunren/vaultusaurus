@@ -25,8 +25,6 @@ A suite of tools to seamlessly integrate a Obsidian Vault into my Docusaurus web
 # Coming soon! Detailed instructions on how to set up and use the bridge.
 ```
 
-## 📚 References
+##
 
-- [mdast](syntax-tree/mdast): A powerful Markdown abstract syntax tree (AST) library
-- [Marked](marked.js.org): A fast and efficient Markdown parser
-- [docusaurus-openapi-docs](<(PaloAltoNetworks/docusaurus-openapi-docs)>): A Docusaurus plugin for generating API documentation
+- [mdast](syntax-tree/mdast)
