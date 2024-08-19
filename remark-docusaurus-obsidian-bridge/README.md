@@ -4,7 +4,7 @@ A Remark plugin to transform Obsidian-specific Markdown syntax into Docusaurus-c
 
 | Obsidian                                    | Docusaurus (Without plugin)                                                   | Docusaurus (With plugin)                                                |
 |---------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| ![obsidian_demo](/assets/obsidian_demo.png) | ![docusaurus_without_plugin_demo](/assets/docusaurus_without_plugin_demo.png) | ![docusaurus_with_plugin_demo](/assets/docusaurus_with_plugin_demo.png) |
+| ![obsidian_demo](./assets/obsidian_demo.png) | ![docusaurus_without_plugin_demo](./assets/docusaurus_without_plugin_demo.png) | ![docusaurus_with_plugin_demo](./assets/docusaurus_with_plugin_demo.png) |
 
 Handles
 - Admonitions ([javalent/admonitions](https://github.com/javalent/admonitions))
