@@ -2,28 +2,14 @@
 
 A Remark plugin to transform Obsidian-specific Markdown syntax into Docusaurus-compatible syntax
 
-## ✨ Features
+| Obsidian                                    | Docusaurus (Without plugin)                                                   | Docusaurus (With plugin)                                                |
+|---------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| ![obsidian_demo](/assets/obsidian_demo.png) | ![docusaurus_without_plugin_demo](/assets/docusaurus_without_plugin_demo.png) | ![docusaurus_with_plugin_demo](/assets/docusaurus_with_plugin_demo.png) |
 
-<details>
-<summary>Internal links</summary>
-
-Convert obsidian's internal link ( `[[link]]` ) to Docusaurus-friendly internal links
-
-</details>
-
-<details>
-<summary>Admonitions</summary>
-
-Converts obsidian `admonitions` ([javalent/admonitions](https://github.com/javalent/admonitions)) to Docusaurus-friendly admonotions
-
-</details>
-
-<details>
-<summary>Tags</summary>
-
-Convert obsidian's tags (`#tag`) to Docusaurus-friendly internal links
-
-</details>
+Handles
+- Admonitions ([javalent/admonitions](https://github.com/javalent/admonitions))
+- Internal links
+- Tags
 
 ## 🌳 Usage
 
@@ -41,7 +27,9 @@ Convert obsidian's tags (`#tag`) to Docusaurus-friendly internal links
         docs: {
           sidebarPath: "./sidebars.ts",
           exclude: ["**/templates/*"],
-          beforeDefaultRemarkPlugins: [convertToDocusaurusMdx],
+          beforeDefaultRemarkPlugins: [
+            [convertToDocusaurusMdx, { customReplacers: [dateTagReplacer] }],
+          ],
         },
         ...
       } satisfies Preset.Options,

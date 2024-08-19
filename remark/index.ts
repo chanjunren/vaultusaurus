@@ -7,14 +7,12 @@ import noteLinkReplacer from "./replacers/noteLink";
 import tagReplacer from "./replacers/tag";
 import { PluginOptions } from "./types";
 
-export default function convertToDocusaurusMdx({
-  customReplacers = [],
-}: PluginOptions) {
+export default function convertToDocusaurusMdx(options: PluginOptions) {
   return async (ast: Nodes, fileLocation) => {
     const mappedTree = map(ast, admonitionMapper);
 
     findAndReplace(mappedTree, [
-      ...customReplacers,
+      ...(options?.customReplacers || []),
       imageReplacer,
       tagReplacer,
       noteLinkReplacer,
