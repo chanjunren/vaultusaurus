@@ -3,7 +3,8 @@ import { u } from "unist-builder";
 
 const OBSIDIAN_TAG_REGEX = /#\S+/g;
 
-// Figure out how to fix typescript error
+// TODO: Figure out how to fix typescript error
+// TODO: Integrate with linked nodes
 const tagReplacer: [Find, Replace?] = [
   OBSIDIAN_TAG_REGEX,
   function (input) {

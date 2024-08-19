@@ -27,6 +27,7 @@ const WARNING_OPTIONS: Set<string> = new Set([
   "caution",
   "attention",
 ]);
+
 const DANGER_OPTIONS: Set<string> = new Set([
   "failure",
   "fail",

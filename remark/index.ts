@@ -2,13 +2,24 @@ import { Nodes } from "mdast";
 import { findAndReplace } from "mdast-util-find-and-replace";
 import { map } from "unist-util-map";
 import admonitionMapper from "./mappers/admonition";
-import CUSTOM_REPLACERS from "./replacers/custom";
-import OBSIDIAN_REPLACERS from "./replacers/obsidian";
+import imageReplacer from "./replacers/img";
+import noteLinkReplacer from "./replacers/noteLink";
+import tagReplacer from "./replacers/tag";
+import { PluginOptions } from "./types";
 
-export default function convertToDocusaurusMdx() {
-  return async (tree: Nodes) => {
-    findAndReplace(tree, [...CUSTOM_REPLACERS, ...OBSIDIAN_REPLACERS]);
+export default function convertToDocusaurusMdx({
+  customReplacers = [],
+}: PluginOptions) {
+  return async (ast: Nodes, fileLocation) => {
+    const mappedTree = map(ast, admonitionMapper);
 
-    return map(tree, admonitionMapper);
+    findAndReplace(mappedTree, [
+      ...customReplacers,
+      imageReplacer,
+      tagReplacer,
+      noteLinkReplacer,
+    ]);
+
+    return mappedTree;
   };
 }

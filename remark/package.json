@@ -1,7 +1,7 @@
 {
   "name": "remark-docusaurus-obsidian-bridge",
-  "version": "1.0.0",
-  "description": "Utility for rendering obsidian components on a docusaurus website",
+  "version": "1.0.2",
+  "description": "Remark plugin for porting Obsidian components to Docusaurus-friendly equivalents",
   "main": "index.ts",
   "type": "module",
   "keywords": [
