@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "lib": ["ES2015", "DOM"]
+  }
+}

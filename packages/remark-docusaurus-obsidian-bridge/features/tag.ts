@@ -1,10 +1,8 @@
 import { Find, Replace } from "mdast-util-find-and-replace";
 import { u } from "unist-builder";
-
-const OBSIDIAN_TAG_REGEX = /#\S+/g;
+import { OBSIDIAN_TAG_REGEX } from "../../docusaurus-obsidian-bridge-common/constants";
 
 // TODO: Figure out how to fix typescript error
-// TODO: Integrate with linked nodes
 const tagReplacer: [Find, Replace?] = [
   OBSIDIAN_TAG_REGEX,
   function (input) {

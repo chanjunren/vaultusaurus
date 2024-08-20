@@ -1,7 +1,7 @@
 import { Find, Replace } from "mdast-util-find-and-replace";
 import { u } from "unist-builder";
 
-const OBSIDIAN_NOTE_LINK_REGEX = /\[\[.*?\]\]/g;
+export const OBSIDIAN_NOTE_LINK_REGEX = /(?<!!)\[\[.*?\]\]/g;
 
 const noteLinkReplacer: [Find, Replace?] = [
   OBSIDIAN_NOTE_LINK_REGEX,

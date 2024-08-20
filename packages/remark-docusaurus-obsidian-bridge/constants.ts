@@ -6,12 +6,12 @@ const INFO_OPTIONS: Set<string> = new Set([
   "tldr",
   "info",
   "todo",
-  "tip",
   "hint",
   "important",
 ]);
 
 const TIP_OPTIONS: Set<string> = new Set([
+  "tip",
   "success",
   "check",
   "done",

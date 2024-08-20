@@ -1,0 +1,19 @@
+{
+  "name": "docusaurus-obsidian-graph",
+  "version": "1.0.0",
+  "description": "plugin for rendering a local graph on your docusaurus website",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@docusaurus/types": "^3.5.2",
+    "@types/mdast": "^4.0.4"
+  },
+  "dependencies": {
+    "glob": "^11.0.0",
+    "mdast-util-from-markdown": "^2.0.1"
+  }
+}
