@@ -5,54 +5,93 @@ import { Text } from "mdast";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import path from "path";
 import { visit } from "unist-util-visit";
-import { OBSIDIAN_TAG_REGEX } from "../docusaurus-obsidian-bridge-common/constants";
-import { DocumentTags, FileLocations } from "./types";
+import {
+  OBSIDIAN_INTERNAL_LINK_REGEX,
+  OBSIDIAN_TAG_REGEX,
+} from "../docusaurus-obsidian-bridge-common/constants";
+import { Output } from "../docusaurus-obsidian-bridge-common/types";
 
-export default async function pluginDocusaurusObsidianBridge(
+export default async function docusaurusPluginObsidianBridge(
   context: LoadContext,
   opts: PluginOptions
 ): Promise<Plugin> {
   return {
-    name: "docusaurus-obsidian-bridge",
+    name: "docusaurus-plugin-obsidian-bridge",
 
     async contentLoaded({ actions }) {
       const { createData } = actions;
-      const docsDir = path.join(context.siteDir, "docs");
-      const documentLocations: FileLocations = {};
-      const tags: DocumentTags = {};
+      const docsDirectory = path.join(context.siteDir, "docs");
+      const metadata: Output = {
+        documents: {},
+        tags: {},
+      };
 
       try {
-        globStreamSync("**/*.{md,mdx}", { cwd: docsDir }).on("data", (p) => {
-          const filePath = path.join(docsDir, p);
-          const fileContent = readFileSync(filePath, { encoding: "utf-8" });
-          documentLocations[p] = filePath;
+        globStreamSync("**/*.{md,mdx}", { cwd: docsDirectory }).on(
+          "data",
+          (p) => {
+            const filePath = path.join(docsDirectory, p);
+            const fileContent = readFileSync(filePath, { encoding: "utf-8" });
+            const fileName = getFileName(p);
 
-          visit(fromMarkdown(fileContent), "text", function (node) {
-            processTags(tags, node, p);
-          });
-        });
+            initDocument(metadata, fileName, p);
 
-        await createData(
-          "bridgeMetadata.json",
-          JSON.stringify({
-            documentLocations,
-            tags,
-          })
+            visit(fromMarkdown(fileContent), "text", function (node) {
+              processTags(metadata, node, fileName);
+              processInternalLinks(metadata, node, fileName);
+            });
+          }
         );
+
+        await createData("bridgeMetadata.json", JSON.stringify(metadata));
       } catch (err) {
         console.error("🐞", err);
       }
     },
   };
 
-  function processTags(tags: DocumentTags, node: Text, p: string) {
+  function initDocument(metadata: Output, fileName: string, p: string) {
+    metadata.documents[fileName] = {
+      relativeFilePath: path.join("/docs", p),
+      tags: [],
+      internalLinks: [],
+    };
+  }
+
+  function getFileName(path: string): string {
+    const arr = path.split("/");
+    return arr[arr.length - 1].split(".md")[0];
+  }
+
+  function processTags(metadata: Output, node: Text, fileName: string) {
     const matches = node.value.matchAll(OBSIDIAN_TAG_REGEX);
     for (const match of matches) {
       const tag = match[0].slice(1, match[0].length);
-      if (!tags[tag]) {
-        tags[tag] = [];
+      if (!metadata.tags[tag]) {
+        metadata.tags[tag] = [];
       }
-      tags[tag] = [...tags[tag], p];
+      metadata.tags[tag] = [...metadata.tags[tag], fileName];
+
+      metadata.documents[fileName].tags = [
+        ...metadata.documents[fileName].tags,
+        tag,
+      ];
+    }
+  }
+
+  function processInternalLinks(
+    metadata: Output,
+    node: Text,
+    fileName: string
+  ) {
+    const matches = node.value.matchAll(OBSIDIAN_INTERNAL_LINK_REGEX);
+    for (const match of matches) {
+      const internalLink = match[0].slice(2, -2);
+
+      metadata.documents[fileName].internalLinks = [
+        ...metadata.documents[fileName].internalLinks,
+        internalLink,
+      ];
     }
   }
 }
