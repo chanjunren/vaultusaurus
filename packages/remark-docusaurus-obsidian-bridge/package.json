@@ -2,7 +2,7 @@
   "name": "remark-docusaurus-obsidian-bridge",
   "version": "1.0.2",
   "description": "Remark plugin for porting Obsidian components to Docusaurus-friendly equivalents",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "type": "module",
   "keywords": [
     "remark",
