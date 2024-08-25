@@ -2,10 +2,8 @@
   "name": "docusaurus-obsidian-graph",
   "version": "1.0.0",
   "description": "plugin for rendering a local graph on your docusaurus website",
-  "main": "index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "src/index.ts",
+  "scripts": {},
   "author": "",
   "license": "MIT",
   "devDependencies": {
