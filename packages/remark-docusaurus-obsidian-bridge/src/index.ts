@@ -4,7 +4,8 @@ import { findAndReplace } from "mdast-util-find-and-replace";
 import fs from "fs";
 import path from "path";
 import { map } from "unist-util-map";
-import { Output as ObsidianBridgeMetadata } from "../docusaurus-obsidian-bridge-common/types";
+import { VAULT_METADATA } from "../../docusaurus-obsidian-bridge-common/src/constants";
+import { Output as ObsidianBridgeMetadata } from "../../docusaurus-obsidian-bridge-common/src/types";
 import admonitionMapper from "./features/admonition";
 import imageReplacer from "./features/img";
 import { internalLinkReplacer } from "./features/internalLink";
@@ -16,7 +17,7 @@ export default function convertToDocusaurusMdx(
 ) {
   const metadataPath = path.join(
     process.env.PWD,
-    ".docusaurus/docusaurus-plugin-obsidian-bridge/default/bridgeMetadata.json"
+    `.docusaurus/docusaurus-plugin-obsidian-bridge/default/${VAULT_METADATA}`
   );
   const metadata = retrieveMetadata();
 
@@ -35,7 +36,7 @@ export default function convertToDocusaurusMdx(
   function retrieveMetadata(): ObsidianBridgeMetadata {
     if (!fs.existsSync(metadataPath)) {
       throw new Error(
-        "🐞 Missing metadata.json - Please use this plugin in conjunction with docusaurus-plugin-obsidian-bridge"
+        `🐞 Missing ${VAULT_METADATA} - Please use this plugin in conjunction with docusaurus-plugin-obsidian-bridge`
       );
     }
 

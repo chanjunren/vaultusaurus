@@ -8,8 +8,9 @@ import { visit } from "unist-util-visit";
 import {
   OBSIDIAN_INTERNAL_LINK_REGEX,
   OBSIDIAN_TAG_REGEX,
-} from "../docusaurus-obsidian-bridge-common/constants";
-import { Output } from "../docusaurus-obsidian-bridge-common/types";
+  VAULT_METADATA,
+} from "../../docusaurus-obsidian-bridge-common/src/constants";
+import { Output } from "../../docusaurus-obsidian-bridge-common/src/types";
 
 export default async function docusaurusPluginObsidianBridge(
   context: LoadContext,
@@ -19,7 +20,7 @@ export default async function docusaurusPluginObsidianBridge(
     name: "docusaurus-plugin-obsidian-bridge",
 
     async contentLoaded({ actions }) {
-      const { createData } = actions;
+      const { createData, setGlobalData } = actions;
       const docsDirectory = path.join(context.siteDir, "docs");
       const metadata: Output = {
         documents: {},
@@ -43,7 +44,8 @@ export default async function docusaurusPluginObsidianBridge(
           }
         );
 
-        await createData("bridgeMetadata.json", JSON.stringify(metadata));
+        await createData(VAULT_METADATA, JSON.stringify(metadata));
+        await setGlobalData(metadata);
       } catch (err) {
         console.error("🐞", err);
       }
