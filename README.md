@@ -6,9 +6,9 @@ Tools for integrating a Obsidian Vault with a Docusaurus website
 > As of now, this is just a personal project meant for my [portfolio website](https://chanjunren.github.io)
 
 
-| Obsidian                                    | Docusaurus (Without plugin)                                                   | Docusaurus (With plugin)                                                |
-|---------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| ![obsidian_demo](./assets/obsidian_demo.png) | ![docusaurus_without_plugin_demo](./assets/docusaurus_without_plugin_demo.png) | ![docusaurus_with_plugin_demo](./assets/docusaurus_with_plugin_demo.png) |
+| Obsidian                                                                                                                  | Docusaurus (Without plugin)                                                                                                                                 | Docusaurus (With plugin)                                                                                                                              |
+|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![obsidian_demo](https://raw.githubusercontent.com/chanjunren/docusaurus-obsidian-bridge/master/assets/obsidian_demo.png) | ![docusaurus_without_plugin_demo](https://raw.githubusercontent.com/chanjunren/docusaurus-obsidian-bridge/master/assets/docusaurus_without_plugin_demo.png) | ![docusaurus_with_plugin_demo](https://raw.githubusercontent.com/chanjunren/docusaurus-obsidian-bridge/master/assets/docusaurus_with_plugin_demo.png) |
 
 Handles
 - Admonitions ([javalent/admonitions](https://github.com/javalent/admonitions))

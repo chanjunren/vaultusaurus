@@ -1,6 +1,7 @@
 # remark-obsidian-to-docusaurus
 
 A Remark plugin to transform Obsidian-specific Markdown syntax into Docusaurus-compatible syntax
+
 ## 📚 Resources
 
 - [Docusaurus's official documentation](https://docusaurus.io/docs/markdown-features/plugins)
