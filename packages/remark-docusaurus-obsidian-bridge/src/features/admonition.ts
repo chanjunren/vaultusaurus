@@ -35,7 +35,7 @@ const admonitionMapper = function (node) {
     {},
     node,
     u("containerDirective", {
-      name: docusaurusAdmonition(type), // TODO: Enhance this
+      name: docusaurusAdmonition(type),
       children: [admonitionTitle(type), ...fromMarkdown(node.value).children],
     })
   );

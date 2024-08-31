@@ -6,9 +6,8 @@ export type DocumentMetadata = {
   internalLinks: string[];
 };
 
-export type Output = {
+export type RemarkObsidianBridgeInput = {
   documents: {
     [fileName: string]: DocumentMetadata;
   };
-  tags: TagMap;
 };
