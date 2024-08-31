@@ -18,7 +18,7 @@ export default async function docusaurusPluginObsidianBridge(
     name: "docusaurus-plugin-obsidian-bridge",
 
     async contentLoaded({ actions }) {
-      const { createData, setGlobalData } = actions;
+      const { createData } = actions;
       const docsDirectory = path.join(context.siteDir, "docs");
       const remarkPluginInput: ObsidianVaultInfo = {
         documents: {},
@@ -40,7 +40,7 @@ export default async function docusaurusPluginObsidianBridge(
         );
 
         // Can only be done after all markdown files have been pre-processed
-        postProcess(tagsInfo, remarkPluginInput, createData);
+        postProcess(tagsInfo, remarkPluginInput, actions);
 
         await createData(
           REMARK_OBSIDIAN_BRIDGE_INPUT,

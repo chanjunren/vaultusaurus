@@ -1,6 +1,5 @@
 export type ObsidianTagInfo = {
   linkedDocuments: string[];
-  linkedDocumentPaths: string[];
 };
 
 export type ObsidianTagsInfo = { [tag: string]: ObsidianTagInfo };
@@ -33,7 +32,7 @@ export type GraphNodeLink = {
   target: string;
 };
 
-export type GraphNodesInfo = {
+export type GraphInfo = {
   links: GraphNodeLink[];
   nodes: GraphNode[];
 };

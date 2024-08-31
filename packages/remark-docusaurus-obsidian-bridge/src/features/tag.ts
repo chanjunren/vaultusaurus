@@ -11,7 +11,7 @@ const tagReplacer: [Find, Replace?] = [
       attributes: [
         {
           type: "mdxJsxAttribute",
-          name: "class",
+          name: "className",
           value: "theme-doc-version-badge badge badge--secondary",
         },
       ],

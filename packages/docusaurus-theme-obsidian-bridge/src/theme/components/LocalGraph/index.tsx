@@ -1,14 +1,11 @@
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { useRef } from "react";
-import styles from "../../../css/index.module.css";
+import styles from "../../css/index.module.css";
 
 export default function LocalGraph({ width = 250, height = 250 }) {
   const gx = useRef();
   const pluginData = usePluginData("docusaurus-plugin-obsidian-bridge");
-  console.log("CONTEXT", JSON.stringify(useDocusaurusContext()));
-  console.log("CURRENT", window.location.pathname);
-  // console.log("PLUGIN_DATA", pluginData);
+  console.log("PLUGIN_DATA", pluginData[window.location.pathname]);
 
   // const gy = useRef();
   // const x = d3.scaleLinear(

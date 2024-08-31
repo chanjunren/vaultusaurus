@@ -5,6 +5,7 @@ import {
 } from "../../docusaurus-obsidian-bridge-common/src/constants";
 import {
   AdjcacencyMap,
+  GraphInfo,
   GraphNode,
   GraphNodeLink,
   ObsidianTagsInfo,
@@ -14,78 +15,70 @@ import {
 export function postProcess(
   tags: ObsidianTagsInfo,
   vault: ObsidianVaultInfo,
-  createData: PluginContentLoadedActions["createData"]
+  { setGlobalData }: PluginContentLoadedActions
 ) {
-  updateLinkedDocumentsPath(tags, vault);
-
-  updatedLinkedNodes(tags, vault, createData);
-}
-
-function updateLinkedDocumentsPath(
-  tags: ObsidianTagsInfo,
-  result: ObsidianVaultInfo
-) {
-  Object.entries(tags).forEach(([_, value]) => {
-    value.linkedDocuments.forEach((fileName) => {
-      value.linkedDocumentPaths.push(
-        result.documents[fileName].relativeFilePath
-      );
-    });
+  const graphInfoMap: { [filePath: string]: GraphInfo } = {};
+  Object.keys(vault.documents).forEach(async (fileName) => {
+    const relativePath = vault.documents[fileName].relativeFilePath;
+    const graphInfo = buildGraphInfo(vault, fileName, tags, relativePath);
+    graphInfoMap[relativePath] = graphInfo;
   });
+
+  // TODO: Not sure if I need to optimise this but this could get quite big,
+  // I don't know of any other ways to do this
+  setGlobalData(graphInfoMap);
 }
 
-function updatedLinkedNodes(
-  tags: ObsidianTagsInfo,
+function buildGraphInfo(
   vault: ObsidianVaultInfo,
-  createData: PluginContentLoadedActions["createData"]
-) {
-  Object.entries(vault.documents).forEach(async ([fileName, documentInfo]) => {
-    const visitedDocuments: Set<string> = new Set([]);
-    const visitedTags: Set<string> = new Set([]);
-    const adjacencyMap: AdjcacencyMap = {};
+  fileName: string,
+  tags: ObsidianTagsInfo,
+  relativePath: string
+): GraphInfo {
+  const visitedDocuments: Set<string> = new Set([]);
+  const visitedTags: Set<string> = new Set([]);
+  const adjacencyMap: AdjcacencyMap = {};
 
-    const queue: GraphNode[] = [
-      {
-        id: `${OBSIDIAN_FILE_ID_PREFIX}__${documentInfo.relativeFilePath}`,
-        label: fileName,
-        path: documentInfo.relativeFilePath,
-        type: "DOCUMENT",
-      },
-    ];
+  const queue: GraphNode[] = [
+    {
+      id: `${OBSIDIAN_FILE_ID_PREFIX}__${relativePath}`,
+      label: fileName,
+      path: relativePath,
+      type: "DOCUMENT",
+    },
+  ];
 
-    const nodes: GraphNode[] = [];
-    const links: GraphNodeLink[] = [];
+  const nodes: GraphNode[] = [];
+  const links: GraphNodeLink[] = [];
 
-    while (queue.length !== 0) {
-      const currentNode = queue.shift() as GraphNode;
+  while (queue.length !== 0) {
+    const currentNode = queue.shift() as GraphNode;
 
-      if (visited(currentNode, visitedDocuments, visitedTags)) {
-        continue;
-      }
-
-      nodes.push(currentNode);
-      markAsVisited(currentNode, visitedDocuments, visitedTags);
-
-      if (currentNode.type === "DOCUMENT") {
-        handleDocumentTags(currentNode, queue, links, vault, adjacencyMap);
-        handleInternalLinks(currentNode, queue, links, vault, adjacencyMap);
-      } else if (currentNode.type === "TAG") {
-        handleTaggedDocuments(
-          currentNode,
-          queue,
-          links,
-          vault,
-          tags,
-          adjacencyMap
-        );
-      }
+    if (visited(currentNode, visitedDocuments, visitedTags)) {
+      continue;
     }
 
-    await createData(`${fileName}.json`, {
-      nodes,
-      links,
-    });
-  });
+    nodes.push(currentNode);
+    markAsVisited(currentNode, visitedDocuments, visitedTags);
+
+    if (currentNode.type === "DOCUMENT") {
+      handleDocumentTags(currentNode, queue, links, vault, adjacencyMap);
+      handleInternalLinks(currentNode, queue, links, vault, adjacencyMap);
+    } else if (currentNode.type === "TAG") {
+      handleTaggedDocuments(
+        currentNode,
+        queue,
+        links,
+        vault,
+        tags,
+        adjacencyMap
+      );
+    }
+  }
+  return {
+    nodes,
+    links,
+  };
 }
 
 function visited(

@@ -4,7 +4,10 @@ import { findAndReplace } from "mdast-util-find-and-replace";
 import fs from "fs";
 import path from "path";
 import { map } from "unist-util-map";
-import { REMARK_OBSIDIAN_BRIDGE_INPUT } from "../../docusaurus-obsidian-bridge-common/src/constants";
+import {
+  OBSIDIAN_BRIDGE_PLUGIN_FILES_PREFIX,
+  REMARK_OBSIDIAN_BRIDGE_INPUT,
+} from "../../docusaurus-obsidian-bridge-common/src/constants";
 import { ObsidianVaultInfo } from "../../docusaurus-obsidian-bridge-common/src/types";
 import admonitionMapper from "./features/admonition";
 import imageReplacer from "./features/img";
@@ -17,7 +20,7 @@ export default function convertToDocusaurusMdx(
 ) {
   const metadataPath = path.join(
     process.env.PWD,
-    `.docusaurus/docusaurus-plugin-obsidian-bridge/default/${REMARK_OBSIDIAN_BRIDGE_INPUT}`
+    `${OBSIDIAN_BRIDGE_PLUGIN_FILES_PREFIX}/${REMARK_OBSIDIAN_BRIDGE_INPUT}`
   );
   const metadata = retrieveMetadata();
 

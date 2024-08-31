@@ -34,7 +34,6 @@ function processTags(
     if (!tags[tag]) {
       tags[tag] = {
         linkedDocuments: [],
-        linkedDocumentPaths: [],
       };
     }
 
