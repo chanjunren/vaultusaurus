@@ -4,10 +4,11 @@ import { globStreamSync } from "glob";
 import path from "path";
 import { REMARK_OBSIDIAN_BRIDGE_INPUT } from "../../docusaurus-obsidian-bridge-common/src/constants";
 import {
-  RemarkObsidianBridgeInput,
-  TagMap,
+  ObsidianTagsInfo,
+  ObsidianVaultInfo,
 } from "../../docusaurus-obsidian-bridge-common/src/types";
 import { processFile } from "./mdast";
+import { postProcess } from "./postprocess";
 
 export default async function docusaurusPluginObsidianBridge(
   context: LoadContext,
@@ -19,24 +20,27 @@ export default async function docusaurusPluginObsidianBridge(
     async contentLoaded({ actions }) {
       const { createData, setGlobalData } = actions;
       const docsDirectory = path.join(context.siteDir, "docs");
-      const remarkPluginInput: RemarkObsidianBridgeInput = {
+      const remarkPluginInput: ObsidianVaultInfo = {
         documents: {},
       };
 
-      const tagsInfo: TagMap = {};
+      const tagsInfo: ObsidianTagsInfo = {};
 
       try {
         globStreamSync("**/*.{md,mdx}", { cwd: docsDirectory }).on(
           "data",
-          (p) => {
-            const filePath = path.join(docsDirectory, p);
-            const fileContent = readFileSync(filePath, { encoding: "utf-8" });
-            const fileName = getFileName(p);
+          (relativePath) => {
+            const fullPath = path.join(docsDirectory, relativePath);
+            const fileContent = readFileSync(fullPath, { encoding: "utf-8" });
+            const fileName = getFileName(relativePath);
 
-            initDocument(remarkPluginInput, fileName, p);
+            initDocument(remarkPluginInput, fileName, relativePath);
             processFile(remarkPluginInput, tagsInfo, fileName, fileContent);
           }
         );
+
+        // Can only be done after all markdown files have been pre-processed
+        postProcess(tagsInfo, remarkPluginInput, createData);
 
         await createData(
           REMARK_OBSIDIAN_BRIDGE_INPUT,
@@ -49,12 +53,12 @@ export default async function docusaurusPluginObsidianBridge(
   };
 
   function initDocument(
-    metadata: RemarkObsidianBridgeInput,
+    metadata: ObsidianVaultInfo,
     fileName: string,
     p: string
   ) {
     metadata.documents[fileName] = {
-      relativeFilePath: path.join("/docs", p),
+      relativeFilePath: path.join("/docs", p.slice(0, -3)),
       tags: [],
       internalLinks: [],
     };

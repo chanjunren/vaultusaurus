@@ -6,35 +6,49 @@ import {
   OBSIDIAN_TAG_REGEX,
 } from "../../docusaurus-obsidian-bridge-common/src/constants";
 import {
-  RemarkObsidianBridgeInput,
-  TagMap,
+  ObsidianTagsInfo,
+  ObsidianVaultInfo,
 } from "../../docusaurus-obsidian-bridge-common/src/types";
 
 export function processFile(
-  input: RemarkObsidianBridgeInput,
-  tags: TagMap,
+  input: ObsidianVaultInfo,
+  tags: ObsidianTagsInfo,
   fileName: string,
   fileContent: string
 ) {
   visit(fromMarkdown(fileContent), "text", function (node) {
-    processTags(tags, node, fileName);
+    processTags(input, tags, node, fileName);
     processInternalLinks(input, node, fileName);
   });
 }
 
-function processTags(tags: TagMap, node: Text, fileName: string) {
+function processTags(
+  metadata: ObsidianVaultInfo,
+  tags: ObsidianTagsInfo,
+  node: Text,
+  fileName: string
+) {
   const matches = node.value.matchAll(OBSIDIAN_TAG_REGEX);
   for (const match of matches) {
     const tag = match[0].slice(1, match[0].length);
     if (!tags[tag]) {
-      tags[tag] = [];
+      tags[tag] = {
+        linkedDocuments: [],
+        linkedDocumentPaths: [],
+      };
     }
-    tags[tag] = [...tags[tag], fileName];
+
+    tags[tag].linkedDocuments = [...tags[tag].linkedDocuments, fileName];
+
+    metadata.documents[fileName].tags = [
+      ...metadata.documents[fileName].tags,
+      tag,
+    ];
   }
 }
 
 function processInternalLinks(
-  metadata: RemarkObsidianBridgeInput,
+  metadata: ObsidianVaultInfo,
   node: Text,
   fileName: string
 ) {
