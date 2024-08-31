@@ -1,7 +1,7 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { useRef } from "react";
-import styles from "../../css/index.module.css";
+import styles from "../../../css/index.module.css";
 
 export default function LocalGraph({ width = 250, height = 250 }) {
   const gx = useRef();

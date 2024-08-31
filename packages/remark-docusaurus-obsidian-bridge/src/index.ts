@@ -5,7 +5,7 @@ import fs from "fs";
 import path from "path";
 import { map } from "unist-util-map";
 import { REMARK_OBSIDIAN_BRIDGE_INPUT } from "../../docusaurus-obsidian-bridge-common/src/constants";
-import { RemarkObsidianBridgeInput as ObsidianBridgeMetadata } from "../../docusaurus-obsidian-bridge-common/src/types";
+import { ObsidianVaultInfo } from "../../docusaurus-obsidian-bridge-common/src/types";
 import admonitionMapper from "./features/admonition";
 import imageReplacer from "./features/img";
 import { internalLinkReplacer } from "./features/internalLink";
@@ -33,7 +33,7 @@ export default function convertToDocusaurusMdx(
     return result;
   };
 
-  function retrieveMetadata(): ObsidianBridgeMetadata {
+  function retrieveMetadata(): ObsidianVaultInfo {
     if (!fs.existsSync(metadataPath)) {
       throw new Error(
         `🐞 Missing ${REMARK_OBSIDIAN_BRIDGE_INPUT} - Please use this plugin in conjunction with docusaurus-plugin-obsidian-bridge`

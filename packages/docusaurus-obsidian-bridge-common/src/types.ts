@@ -33,6 +33,11 @@ export type GraphNodeLink = {
   target: string;
 };
 
+export type GraphNodesInfo = {
+  links: GraphNodeLink[];
+  nodes: GraphNode[];
+};
+
 export type AdjcacencyMap = {
   [key: string]: Set<string>;
 };
