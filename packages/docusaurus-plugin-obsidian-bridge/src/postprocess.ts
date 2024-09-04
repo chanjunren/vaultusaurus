@@ -24,8 +24,6 @@ export function postProcess(
     graphInfoMap[relativePath] = graphInfo;
   });
 
-  // TODO: Not sure if I need to optimise this but this could get quite big,
-  // I don't know of any other ways to do this
   setGlobalData(graphInfoMap);
 }
 
@@ -99,6 +97,9 @@ function markAsVisited(
   visitedTags: Set<string>
 ) {
   if (currentNode.type === "DOCUMENT") {
+    if (!currentNode.path) {
+      console.log("UNDEFINED PATH", currentNode);
+    }
     visitedDocuments.add(currentNode.path as string);
   } else if (currentNode.type === "TAG") {
     visitedTags.add(currentNode.label);
@@ -162,6 +163,7 @@ function handleDocumentTags(
       label: tag,
       type: "TAG",
     });
+
     handleLink(currentNode.id, tagNodeId, adjacencyMap, links);
   });
 }
@@ -180,6 +182,7 @@ function handleInternalLinks(
       id: internalLinkId,
       label: internalLink,
       type: "DOCUMENT",
+      path: vault.documents[internalLink].relativeFilePath,
     });
 
     handleLink(currentNode.id, internalLinkId, adjacencyMap, links);
@@ -196,6 +199,7 @@ function handleTaggedDocuments(
 ) {
   tags[currentNode.label].linkedDocuments.forEach((linkedDocument) => {
     const linkedDocumentId = `${OBSIDIAN_FILE_ID_PREFIX}__${vault.documents[linkedDocument].relativeFilePath}`;
+
     queue.push({
       id: linkedDocumentId,
       label: linkedDocument,
