@@ -8,11 +8,18 @@ type BridgeNodeProps = {
 const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
   return (
     <>
-      <circle stroke="#fff" strokeWidth={1.5} r={5} cx={node.x} cy={node.y} />
+      <circle
+        stroke="#fff"
+        fill="#fff"
+        strokeWidth={1.5}
+        r={5}
+        cx={node.x}
+        cy={node.y}
+      />
       {/* Render the label as a text element */}
       <text
         x={node.x}
-        y={node.y - 10}
+        y={node.y + 20}
         fill="#fff"
         fontSize={10}
         textAnchor="middle"

@@ -5,24 +5,21 @@ type BridgeLinkProps = {
   link: ObsidianNoteLink;
 };
 
-function isNode(
-  node: string | number | ObsidianNoteNode
-): node is ObsidianNoteNode {
-  return typeof node === "object" && "x" in node && "y" in node;
-}
-
 const BridgeLink: FC<BridgeLinkProps> = ({ link }) => {
-  return isNode(link.source) && isNode(link.target) ? (
+  const source = link.source as ObsidianNoteNode;
+  const target = link.target as ObsidianNoteNode;
+  return (
     <line
       stroke="#fff"
+      opacity={0.2}
       strokeWidth={3}
       strokeOpacity={1}
-      x1={link.source.x}
-      y1={link.source.y}
-      x2={link.target.x}
-      y2={link.target.y}
+      x1={source.x}
+      y1={source.y}
+      x2={target.x}
+      y2={target.y}
     />
-  ) : null;
+  );
 };
 
 export default BridgeLink;
