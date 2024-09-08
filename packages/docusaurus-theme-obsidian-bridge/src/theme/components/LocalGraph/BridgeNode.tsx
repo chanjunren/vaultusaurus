@@ -31,7 +31,6 @@ const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
         cx={node.x}
         cy={node.y}
       />
-      {/* Render the label as a text element */}
       <text
         x={node.x}
         y={node.y + 20}
@@ -40,7 +39,7 @@ const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
         fontSize={10}
         textAnchor="middle"
       >
-        {node.label} {/* Render the node's label */}
+        {node.label}
       </text>
     </>
   ) : null;
