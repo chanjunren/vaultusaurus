@@ -49,7 +49,7 @@ const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
         fontSize={10}
         textAnchor="middle"
       >
-        {node.label}
+        {node.type === "DOCUMENT" ? node.label : `#${node.label}`}
       </text>
     </>
   ) : null;
