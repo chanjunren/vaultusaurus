@@ -20,11 +20,11 @@ export default function LocalGraph() {
     "docusaurus-plugin-obsidian-bridge"
   )[window.location.pathname];
 
-  const { nodes, links } = useLocalGraph(graphData);
+  const { nodes, links } = useLocalGraph(structuredClone(graphData));
 
   return (
     <GraphContext.Provider value={useGraphInteraction(graphData?.links || [])}>
-      <svg className={styles.container}>
+      <svg className={styles.container} viewBox={`0 0 460 460`}>
         {links
           .filter((link) => isNode(link.source) && isNode(link.target))
           .map((link) => (

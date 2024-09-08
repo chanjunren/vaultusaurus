@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { AdjcacencyMap, ObsidianNoteLink, ObsidianNoteNode } from "../types";
-import { isNode } from "../utils";
+import { GraphNodeLink } from "../../../../docusaurus-obsidian-bridge-common/src/types";
+import { AdjcacencyMap, ObsidianNoteNode } from "../types";
 
-export default function useGraphInteraction(links: ObsidianNoteLink[]) {
+export default function useGraphInteraction(links: GraphNodeLink[]) {
   const [hoveredNode, setHoveredNode] = useState<ObsidianNoteNode>(null);
   const [adjacencyMap, setAdjacencyMap] = useState<AdjcacencyMap>({});
 
@@ -11,19 +11,22 @@ export default function useGraphInteraction(links: ObsidianNoteLink[]) {
       return;
     }
     const newMap = {};
-    links
-      .filter((link) => isNode(link.source) && isNode(link.target))
-      .forEach((link) => {
-        const sourceNode = link.source as ObsidianNoteNode;
-        const targetNode = link.target as ObsidianNoteNode;
-        if (!newMap[sourceNode.id]) newMap[sourceNode.id] = new Set();
-        if (!newMap[targetNode.id]) newMap[targetNode.id] = new Set();
+    links.forEach((link) => {
+      if (!newMap[link.source]) {
+        newMap[link.source] = new Set();
+      }
+      if (!newMap[link.target]) {
+        newMap[link.target] = new Set();
+      }
+      console.log("PROCESSING", link);
+      newMap[link.source].add(link.target);
+      newMap[link.target].add(link.source);
+      console.log("OUTPUT", newMap);
+    });
 
-        newMap[sourceNode.id].add(targetNode.id);
-        newMap[targetNode.id].add(sourceNode.id);
-      });
-
+    console.log("LINKS", links);
     setAdjacencyMap(newMap);
+    console.log("NEW_MAPPU", newMap);
   }, [links]);
 
   return { hoveredNode, setHoveredNode, adjacencyMap };
