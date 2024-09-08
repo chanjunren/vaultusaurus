@@ -1,4 +1,3 @@
-import { usePluginData } from "@docusaurus/useGlobalData";
 import {
   forceCenter,
   forceCollide,
@@ -7,25 +6,20 @@ import {
   forceSimulation,
 } from "d3-force";
 import { useEffect, useState } from "react";
-import { GraphInfo } from "../../../docusaurus-obsidian-bridge-common/src/types";
-import { ObsidianNoteLink, ObsidianNoteNode } from "./types";
+import { GraphInfo } from "../../../../docusaurus-obsidian-bridge-common/src/types";
+import { ObsidianNoteLink, ObsidianNoteNode } from "../types";
 
 const WIDTH = 240;
 const HEIGHT = 240;
 const LINK_DISTANCE = 50;
 
-export default function useLocalGraph() {
-  const graphData: GraphInfo = usePluginData(
-    "docusaurus-plugin-obsidian-bridge"
-  )[window.location.pathname];
-
+export default function useLocalGraph(graphData: GraphInfo) {
   const [nodes, setNodes] = useState<ObsidianNoteNode[]>(
     graphData?.nodes || []
   );
   const [links, setLinks] = useState<ObsidianNoteLink[]>(
     graphData?.links || []
   );
-
   useEffect(() => {
     if (!graphData?.nodes || !graphData?.links) {
       return;

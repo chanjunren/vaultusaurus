@@ -1,4 +1,3 @@
-import { ObsidianNoteLink, ObsidianNoteNode } from "@site/src/types";
 import { FC } from "react";
 
 type BridgeLinkProps = {
@@ -8,6 +7,7 @@ type BridgeLinkProps = {
 const BridgeLink: FC<BridgeLinkProps> = ({ link }) => {
   const source = link.source as ObsidianNoteNode;
   const target = link.target as ObsidianNoteNode;
+
   return (
     <line
       stroke="#fff"

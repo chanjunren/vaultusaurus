@@ -1,24 +1,36 @@
+import { usePluginData } from "@docusaurus/useGlobalData";
+import { GraphInfo } from "../../../../../docusaurus-obsidian-bridge-common/src/types";
 import { GraphContext } from "../../context";
 import styles from "../../css/index.module.css";
+import useGraphInteraction from "../../hooks/useGraphInteraction";
+import useLocalGraph from "../../hooks/useLocalGraph";
 import { ObsidianNoteNode } from "../../types";
-import useLocalGraph from "../../useLocalGraph";
 import BridgeLink from "./BridgeLink";
 import BridgeNode from "./BridgeNode";
 
 function isNode(
   node: string | number | ObsidianNoteNode
 ): node is ObsidianNoteNode {
-  return typeof node === "object" && "x" in node && "y" in node;
+  return typeof node === "object" && !!node["x"] && !!node["y"];
 }
 
+// TODO:
+// - [ ] Navigating to document
+// - [ ] Zoom
+// - [ ] Highlighting node and edge
+// - [ ] Customizations
+// - [ ] Modal
+
 export default function LocalGraph() {
-  const { nodes, links } = useLocalGraph();
+  const graphData: GraphInfo = usePluginData(
+    "docusaurus-plugin-obsidian-bridge"
+  )[window.location.pathname];
+
+  const { nodes, links } = useLocalGraph(graphData);
+
   return (
-    <GraphContext.Provider value={{}}>
+    <GraphContext.Provider value={useGraphInteraction(graphData)}>
       <svg className={styles.container}>
-        {nodes.map((node) => (
-          <BridgeNode key={node.id} node={node} />
-        ))}
         {links
           .filter((link) => isNode(link.source) && isNode(link.target))
           .map((link) => (
@@ -29,6 +41,9 @@ export default function LocalGraph() {
               link={link}
             />
           ))}
+        {nodes.map((node) => (
+          <BridgeNode key={node.id} node={node} />
+        ))}
       </svg>
     </GraphContext.Provider>
   );
