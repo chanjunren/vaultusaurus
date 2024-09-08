@@ -4,3 +4,7 @@
     height: 230px;
     border-radius: 8px;
 }
+
+.graphComponent {
+    transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease;
+}

@@ -1,6 +1,8 @@
 import { FC, useContext } from "react";
 import { GraphContext } from "../../context";
+import styles from "../../css/index.module.css";
 import { ObsidianNoteLink, ObsidianNoteNode } from "../../types";
+import { DEFAULT_SECONDARY_COLOR } from "../../utils";
 
 type BridgeLinkProps = {
   link: ObsidianNoteLink;
@@ -17,9 +19,10 @@ const BridgeLink: FC<BridgeLinkProps> = ({ link }) => {
 
   return (
     <line
-      stroke="#fff"
-      opacity={someNodeisHovered && !focused ? 0.2 : 1}
-      strokeWidth={3}
+      stroke={DEFAULT_SECONDARY_COLOR}
+      className={styles.graphComponent}
+      opacity={someNodeisHovered && !focused ? 0.2 : 0.6}
+      strokeWidth={1}
       strokeOpacity={1}
       x1={source.x}
       y1={source.y}

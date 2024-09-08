@@ -5,3 +5,6 @@ export function isNode(
 ): node is ObsidianNoteNode {
   return typeof node === "object" && !!node["x"] && !!node["y"];
 }
+
+export const DEFAULT_SECONDARY_COLOR = "#fff";
+export const DEFAULT_PRIMARY_COLOR = "var(--ifm-color-primary)";
