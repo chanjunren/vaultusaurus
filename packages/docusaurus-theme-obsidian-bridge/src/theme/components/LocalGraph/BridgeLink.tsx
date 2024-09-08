@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { ObsidianNoteLink, ObsidianNoteNode } from "../../types";
 
 type BridgeLinkProps = {
   link: ObsidianNoteLink;

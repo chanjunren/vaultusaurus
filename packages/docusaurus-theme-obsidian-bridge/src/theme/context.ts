@@ -3,4 +3,5 @@ import { GraphContextType } from "./types";
 
 export const GraphContext = createContext<GraphContextType>({
   setHoveredNode: () => {},
+  adjacencyMap: {},
 });

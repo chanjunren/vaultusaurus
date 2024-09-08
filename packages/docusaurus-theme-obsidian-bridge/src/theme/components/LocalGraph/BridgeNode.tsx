@@ -7,9 +7,16 @@ type BridgeNodeProps = {
 };
 
 const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
-  const { hoveredNode, setHoveredNode } = useContext(GraphContext);
+  const { hoveredNode, setHoveredNode, adjacencyMap } =
+    useContext(GraphContext);
   const imBeingHovered = hoveredNode?.id === node.id;
   const otherNodeIsHovered = !!hoveredNode?.id;
+  const imTheNeighborOfTheOneBeingHovered =
+    !imBeingHovered &&
+    hoveredNode?.id &&
+    adjacencyMap[hoveredNode.id]?.has(node.id);
+
+  const focused = imBeingHovered || imTheNeighborOfTheOneBeingHovered;
 
   return !!node.x && !!node.y ? (
     <>
@@ -17,8 +24,8 @@ const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
         onMouseEnter={() => setHoveredNode(node)}
         onMouseLeave={() => imBeingHovered && setHoveredNode(null)}
         stroke="#fff"
-        fill={imBeingHovered ? "#fff" : "#f00"}
-        opacity={otherNodeIsHovered && !imBeingHovered ? 0.1 : 1}
+        fill={"#fff"}
+        opacity={otherNodeIsHovered && !focused ? 0.1 : 1}
         strokeWidth={1.5}
         r={5}
         cx={node.x}
@@ -29,7 +36,7 @@ const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
         x={node.x}
         y={node.y + 20}
         fill="#fff"
-        opacity={otherNodeIsHovered && !imBeingHovered ? 0.1 : 1}
+        opacity={otherNodeIsHovered && !focused ? 0.1 : 1}
         fontSize={10}
         textAnchor="middle"
       >

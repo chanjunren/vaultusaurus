@@ -3,7 +3,11 @@ import { GraphNode } from "../../../docusaurus-obsidian-bridge-common/src/types"
 
 export type ObsidianNoteNode = SimulationNodeDatum & GraphNode;
 export type ObsidianNoteLink = SimulationLinkDatum<ObsidianNoteNode>;
+
 export type GraphContextType = {
   hoveredNode?: ObsidianNoteNode;
   setHoveredNode: (node: ObsidianNoteNode) => void;
+  adjacencyMap: AdjcacencyMap;
 };
+
+export type AdjcacencyMap = { [key: string]: Set<string> };
