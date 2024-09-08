@@ -8,12 +8,12 @@ import { ObsidianNoteNode } from "../../types";
 import { isNode } from "../../utils";
 import BridgeLink from "./BridgeLink";
 import BridgeNode from "./BridgeNode";
+
 // TODO:
-// - [ ] Navigating to document
 // - [ ] Zoom
-// - [ ] Highlighting node and edge
 // - [ ] Customizations
 // - [ ] Modal
+// - [ ] Custom popup when clicking on node
 
 export default function LocalGraph() {
   const graphData: GraphInfo = usePluginData(

@@ -1,7 +1,7 @@
-import { ObsidianNoteNode } from "@site/src/types";
 import { FC, useContext } from "react";
 import { GraphContext } from "../../context";
 import styles from "../../css/index.module.css";
+import { ObsidianNoteNode } from "../../types";
 import { DEFAULT_PRIMARY_COLOR, DEFAULT_SECONDARY_COLOR } from "../../utils";
 
 type BridgeNodeProps = {
@@ -22,20 +22,24 @@ const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
 
   return !!node.x && !!node.y ? (
     <>
-      <circle
-        className={styles.graphComponent}
-        onMouseEnter={() => setHoveredNode(node)}
-        onMouseLeave={() => imBeingHovered && setHoveredNode(null)}
-        fill={imBeingHovered ? DEFAULT_PRIMARY_COLOR : DEFAULT_SECONDARY_COLOR}
-        stroke={
-          imBeingHovered ? DEFAULT_PRIMARY_COLOR : DEFAULT_SECONDARY_COLOR
-        }
-        opacity={otherNodeIsHovered && !focused ? 0.1 : 1}
-        strokeWidth={1.5}
-        r={5}
-        cx={node.x}
-        cy={node.y}
-      />
+      <a href={node.type === "DOCUMENT" ? node.path : undefined}>
+        <circle
+          className={styles.graphComponent}
+          onMouseEnter={() => setHoveredNode(node)}
+          onMouseLeave={() => imBeingHovered && setHoveredNode(null)}
+          fill={
+            imBeingHovered ? DEFAULT_PRIMARY_COLOR : DEFAULT_SECONDARY_COLOR
+          }
+          stroke={
+            imBeingHovered ? DEFAULT_PRIMARY_COLOR : DEFAULT_SECONDARY_COLOR
+          }
+          opacity={otherNodeIsHovered && !focused ? 0.1 : 1}
+          strokeWidth={1.5}
+          r={5}
+          cx={node.x}
+          cy={node.y}
+        />
+      </a>
       <text
         className={styles.graphComponent}
         x={node.x}
