@@ -11,6 +11,7 @@ export default function useGraphInteraction(links: GraphNodeLink[]) {
       return;
     }
     const newMap = {};
+    console.log("EFFECTING");
     links.forEach((link) => {
       if (!newMap[link.source]) {
         newMap[link.source] = new Set();
@@ -18,15 +19,11 @@ export default function useGraphInteraction(links: GraphNodeLink[]) {
       if (!newMap[link.target]) {
         newMap[link.target] = new Set();
       }
-      console.log("PROCESSING", link);
       newMap[link.source].add(link.target);
       newMap[link.target].add(link.source);
-      console.log("OUTPUT", newMap);
     });
 
-    console.log("LINKS", links);
     setAdjacencyMap(newMap);
-    console.log("NEW_MAPPU", newMap);
   }, [links]);
 
   return { hoveredNode, setHoveredNode, adjacencyMap };

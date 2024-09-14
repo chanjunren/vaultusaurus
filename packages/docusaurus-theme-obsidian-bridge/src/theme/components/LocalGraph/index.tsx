@@ -10,21 +10,22 @@ import BridgeLink from "./BridgeLink";
 import BridgeNode from "./BridgeNode";
 
 // TODO:
+// - [ ] Drag
 // - [ ] Zoom
 // - [ ] Customizations
 // - [ ] Modal
 // - [ ] Custom popup when clicking on node
 
 export default function LocalGraph() {
-  const graphData: GraphInfo = usePluginData(
-    "docusaurus-plugin-obsidian-bridge"
-  )[window.location.pathname];
+  const rawData: GraphInfo = usePluginData("docusaurus-plugin-obsidian-bridge")[
+    window.location.pathname
+  ];
 
-  const { nodes, links } = useLocalGraph(structuredClone(graphData));
+  const { nodes, links } = useLocalGraph(rawData);
 
   return (
-    <GraphContext.Provider value={useGraphInteraction(graphData?.links || [])}>
-      <svg className={styles.container} viewBox={`0 0 460 460`}>
+    <GraphContext.Provider value={useGraphInteraction(rawData?.links || [])}>
+      <svg className={styles.container} viewBox={`0 0 300 300`}>
         {links
           .filter((link) => isNode(link.source) && isNode(link.target))
           .map((link) => (

@@ -5,7 +5,7 @@ import {
   forceManyBody,
   forceSimulation,
 } from "d3-force";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { GraphInfo } from "../../../../docusaurus-obsidian-bridge-common/src/types";
 import { ObsidianNoteLink, ObsidianNoteNode } from "../types";
 
@@ -13,15 +13,17 @@ const WIDTH = 240;
 const HEIGHT = 240;
 const LINK_DISTANCE = 50;
 
-export default function useLocalGraph(graphData: GraphInfo) {
+export default function useLocalGraph(rawData: GraphInfo) {
+  const graphData = useMemo(() => structuredClone(rawData), [rawData]);
   const [nodes, setNodes] = useState<ObsidianNoteNode[]>(
     graphData?.nodes || []
   );
   const [links, setLinks] = useState<ObsidianNoteLink[]>(
     graphData?.links || []
   );
+
   useEffect(() => {
-    if (!graphData?.nodes || !graphData?.links) {
+    if (!graphData?.nodes) {
       return;
     }
 
