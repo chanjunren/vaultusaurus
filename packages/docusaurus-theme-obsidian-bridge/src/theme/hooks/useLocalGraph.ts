@@ -30,6 +30,7 @@ export default function useLocalGraph(rawData: GraphInfo) {
     const simulation = forceSimulation<ObsidianNoteNode, ObsidianNoteLink>(
       nodes
     )
+      .alphaDecay(0.01)
       .force(
         "link",
         forceLink<ObsidianNoteNode, ObsidianNoteLink>(links)
@@ -47,7 +48,7 @@ export default function useLocalGraph(rawData: GraphInfo) {
     return () => {
       simulation.stop();
     };
-  }, [graphData, nodes, links]);
+  }, [graphData]);
 
   return { nodes, links };
 }
