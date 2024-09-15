@@ -80,7 +80,7 @@ export default function useLocalGraph(rawData: GraphInfo) {
 
 function toNodeMap(nodes: ObsidianNoteNode[]) {
   const res = {};
-  nodes.forEach((node) => (res[node.id] = node));
+  nodes?.forEach((node) => (res[node.id] = node));
   return res;
 }
 
@@ -88,8 +88,10 @@ function prepareNewLinks(
   graph: GraphInfo,
   nodes: { [key: string]: ObsidianNoteNode }
 ): ObsidianNoteLink[] {
-  return graph.links.map((link) => ({
-    source: nodes[link.source],
-    target: nodes[link.target],
-  }));
+  return (
+    graph?.links?.map((link) => ({
+      source: nodes[link.source],
+      target: nodes[link.target],
+    })) || []
+  );
 }

@@ -23,7 +23,7 @@ export default function useGraphNode(
   const focused = imBeingHovered || imTheNeighborOfTheOneBeingHovered;
 
   function dragStarted(event) {
-    if (!event.active) simulation.current.alphaTarget(0.3).restart();
+    if (!event.active) simulation.current.alphaTarget(0.1).restart();
     updateNode(node.id, {
       fx: event.x,
       fy: event.y,
