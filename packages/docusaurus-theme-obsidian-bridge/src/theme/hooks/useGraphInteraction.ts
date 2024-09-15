@@ -10,8 +10,8 @@ export default function useGraphInteraction(links: GraphNodeLink[]) {
     if (!links) {
       return;
     }
+
     const newMap = {};
-    console.log("EFFECTING");
     links.forEach((link) => {
       if (!newMap[link.source]) {
         newMap[link.source] = new Set();

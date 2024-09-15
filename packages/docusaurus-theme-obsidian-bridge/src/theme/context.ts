@@ -1,7 +1,8 @@
 import { createContext } from "react";
-import { GraphContextType } from "./types";
+import { LocalGraphContext } from "./types";
 
-export const GraphContext = createContext<GraphContextType>({
+export const GraphContext = createContext<LocalGraphContext>({
   setHoveredNode: () => {},
   adjacencyMap: {},
+  simulation: null,
 });

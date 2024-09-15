@@ -1,6 +1,7 @@
 import { FC, useContext } from "react";
 import { GraphContext } from "../../context";
 import styles from "../../css/index.module.css";
+import useGraphNode from "../../hooks/useGraphNode";
 import { ObsidianNoteNode } from "../../types";
 import { DEFAULT_PRIMARY_COLOR, DEFAULT_SECONDARY_COLOR } from "../../utils";
 
@@ -9,16 +10,12 @@ type BridgeNodeProps = {
 };
 
 const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
-  const { hoveredNode, setHoveredNode, adjacencyMap } =
-    useContext(GraphContext);
-  const imBeingHovered = hoveredNode?.id === node.id;
-  const otherNodeIsHovered = !!hoveredNode?.id;
-  const imTheNeighborOfTheOneBeingHovered =
-    !imBeingHovered &&
-    hoveredNode?.id &&
-    adjacencyMap[hoveredNode.id]?.has(node.id);
-
-  const focused = imBeingHovered || imTheNeighborOfTheOneBeingHovered;
+  const context = useContext(GraphContext);
+  const { setHoveredNode } = context;
+  const { imBeingHovered, otherNodeIsHovered, focused } = useGraphNode(
+    context,
+    node
+  );
 
   return !!node.x && !!node.y ? (
     <>

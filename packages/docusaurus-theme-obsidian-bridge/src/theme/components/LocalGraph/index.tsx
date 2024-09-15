@@ -4,8 +4,6 @@ import { GraphContext } from "../../context";
 import styles from "../../css/index.module.css";
 import useGraphInteraction from "../../hooks/useGraphInteraction";
 import useLocalGraph from "../../hooks/useLocalGraph";
-import { ObsidianNoteNode } from "../../types";
-import { isNode } from "../../utils";
 import BridgeLink from "./BridgeLink";
 import BridgeNode from "./BridgeNode";
 
@@ -21,21 +19,17 @@ export default function LocalGraph() {
     window.location.pathname
   ];
 
-  const { nodes, links } = useLocalGraph(rawData);
+  const { nodes, graphData, simulation } = useLocalGraph(rawData);
+  const links = rawData?.links || [];
 
   return (
-    <GraphContext.Provider value={useGraphInteraction(rawData?.links || [])}>
+    <GraphContext.Provider
+      value={{ ...useGraphInteraction(links), simulation }}
+    >
       <svg className={styles.container} viewBox={`0 0 300 300`}>
-        {links
-          .filter((link) => isNode(link.source) && isNode(link.target))
-          .map((link) => (
-            <BridgeLink
-              key={`${(link.source as ObsidianNoteNode).id}-${
-                (link.target as ObsidianNoteNode).id
-              }`}
-              link={link}
-            />
-          ))}
+        {graphData.links.map((link, idx) => {
+          return <BridgeLink key={`obsidian-link-${idx}`} link={link} />;
+        })}
         {nodes.map((node) => (
           <BridgeNode key={node.id} node={node} />
         ))}
