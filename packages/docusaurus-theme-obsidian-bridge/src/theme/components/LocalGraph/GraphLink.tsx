@@ -1,14 +1,17 @@
+import { GraphContext } from "@theme/context";
+import styles from "@theme/css/index.module.css";
+import { DEFAULT_SECONDARY_COLOR } from "@theme/utils";
 import { FC, useContext } from "react";
-import { GraphContext } from "../../context";
-import styles from "../../css/index.module.css";
-import { ObsidianNoteLink, ObsidianNoteNode } from "../../types";
-import { DEFAULT_SECONDARY_COLOR } from "../../utils";
+import {
+  ObsidianNoteLink,
+  ObsidianNoteNode,
+} from "../../../../../docusaurus-obsidian-bridge-common/src/types";
 
-type BridgeLinkProps = {
+type GraphLinkProps = {
   link: ObsidianNoteLink;
 };
 
-const BridgeLink: FC<BridgeLinkProps> = ({ link }) => {
+const GraphLink: FC<GraphLinkProps> = ({ link }) => {
   const source = link.source as ObsidianNoteNode;
   const target = link.target as ObsidianNoteNode;
   const { hoveredNode } = useContext(GraphContext);
@@ -32,4 +35,4 @@ const BridgeLink: FC<BridgeLinkProps> = ({ link }) => {
   );
 };
 
-export default BridgeLink;
+export default GraphLink;

@@ -1,15 +1,15 @@
+import { GraphContext } from "@theme/context";
+import styles from "@theme/css/index.module.css";
+import useGraphNode from "@theme/hooks/useGraphNode";
 import { FC, useContext } from "react";
-import { GraphContext } from "../../context";
-import styles from "../../css/index.module.css";
-import useGraphNode from "../../hooks/useGraphNode";
-import { ObsidianNoteNode } from "../../types";
+import { ObsidianNoteNode } from "../../../../../docusaurus-obsidian-bridge-common/src/types";
 import { DEFAULT_PRIMARY_COLOR, DEFAULT_SECONDARY_COLOR } from "../../utils";
 
-type BridgeNodeProps = {
+type GraphNodeProps = {
   node: ObsidianNoteNode;
 };
 
-const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
+const GraphNode: FC<GraphNodeProps> = ({ node }) => {
   const context = useContext(GraphContext);
   const { setHoveredNode } = context;
   const { imBeingHovered, otherNodeIsHovered, focused, nodeRef } = useGraphNode(
@@ -53,4 +53,4 @@ const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
   ) : null;
 };
 
-export default BridgeNode;
+export default GraphNode;

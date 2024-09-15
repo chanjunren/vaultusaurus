@@ -1,7 +1,10 @@
 import { drag } from "d3-drag";
 import { select } from "d3-selection";
 import { useEffect, useRef } from "react";
-import { LocalGraphContext, ObsidianNoteNode } from "../types";
+import {
+  LocalGraphContext,
+  ObsidianNoteNode,
+} from "../../../../docusaurus-obsidian-bridge-common/src/types";
 
 export default function useGraphNode(
   context: LocalGraphContext,

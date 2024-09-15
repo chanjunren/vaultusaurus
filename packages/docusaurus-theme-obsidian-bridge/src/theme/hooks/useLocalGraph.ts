@@ -7,28 +7,15 @@ import {
   Simulation,
 } from "d3-force";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { GraphInfo } from "../../../../docusaurus-obsidian-bridge-common/src/types";
-import { ObsidianNoteLink, ObsidianNoteNode } from "../types";
+import {
+  GraphInfo,
+  ObsidianNoteLink,
+  ObsidianNoteNode,
+} from "../../../../docusaurus-obsidian-bridge-common/src/types";
 
 const WIDTH = 240;
 const HEIGHT = 240;
 const LINK_DISTANCE = 50;
-
-function toNodeMap(nodes: ObsidianNoteNode[]) {
-  const res = {};
-  nodes.forEach((node) => (res[node.id] = node));
-  return res;
-}
-
-function prepareNewLinks(
-  graph: GraphInfo,
-  nodes: { [key: string]: ObsidianNoteNode }
-): ObsidianNoteLink[] {
-  return graph.links.map((link) => ({
-    source: nodes[link.source],
-    target: nodes[link.target],
-  }));
-}
 
 export default function useLocalGraph(rawData: GraphInfo) {
   const graphData = useMemo(() => structuredClone(rawData), [rawData]);
@@ -89,4 +76,20 @@ export default function useLocalGraph(rawData: GraphInfo) {
   }, [graphData, nodes]);
 
   return { nodes, links, simulation, updateNode };
+}
+
+function toNodeMap(nodes: ObsidianNoteNode[]) {
+  const res = {};
+  nodes.forEach((node) => (res[node.id] = node));
+  return res;
+}
+
+function prepareNewLinks(
+  graph: GraphInfo,
+  nodes: { [key: string]: ObsidianNoteNode }
+): ObsidianNoteLink[] {
+  return graph.links.map((link) => ({
+    source: nodes[link.source],
+    target: nodes[link.target],
+  }));
 }

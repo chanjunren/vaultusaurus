@@ -14,7 +14,7 @@
     "target": "ES2015",
     "baseUrl": ".",
     "paths": {
-      "@site/*": ["./*"]
+      "@theme/*": ["./src/theme/*"]
     },
     "skipLibCheck": true
   }

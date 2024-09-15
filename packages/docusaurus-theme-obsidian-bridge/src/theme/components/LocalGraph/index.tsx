@@ -1,13 +1,11 @@
 import { usePluginData } from "@docusaurus/useGlobalData";
+import GraphLink from "@theme/components/LocalGraph/GraphLink";
+import GraphNode from "@theme/components/LocalGraph/GraphNode";
+import { GraphContext } from "@theme/context";
+import styles from "@theme/css/index.module.css";
+import { useHover, useLocalGraph, useZoom } from "@theme/hooks";
 import { useRef } from "react";
 import { GraphInfo } from "../../../../../docusaurus-obsidian-bridge-common/src/types";
-import { GraphContext } from "../../context";
-import styles from "../../css/index.module.css";
-import useHover from "../../hooks/useHover";
-import useLocalGraph from "../../hooks/useLocalGraph";
-import useZoom from "../../hooks/useZoom";
-import BridgeLink from "./BridgeLink";
-import BridgeNode from "./BridgeNode";
 
 // TODO:
 // - [ ] Customizations
@@ -31,10 +29,10 @@ export default function LocalGraph() {
       <svg className={styles.container} viewBox={`0 0 300 300`} ref={container}>
         <g transform={transform}>
           {links.map((link, idx) => {
-            return <BridgeLink key={`obsidian-link-${idx}`} link={link} />;
+            return <GraphLink key={`obsidian-link-${idx}`} link={link} />;
           })}
           {Object.values(nodes).map((node) => (
-            <BridgeNode key={node.id} node={node} />
+            <GraphNode key={node.id} node={node} />
           ))}
         </g>
       </svg>
