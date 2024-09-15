@@ -10,7 +10,7 @@ export default function useHover(links: GraphNodeLinkInfo[]) {
   const [adjacencyMap, setAdjacencyMap] = useState<AdjcacencyMap>({});
 
   useEffect(() => {
-    if (!links) {
+    if (!links || links.length === 0) {
       return;
     }
 
