@@ -10,6 +10,7 @@ export type LocalGraphContext = {
   setHoveredNode: (node: ObsidianNoteNode) => void;
   adjacencyMap: AdjcacencyMap;
   simulation: MutableRefObject<Simulation<ObsidianNoteNode, ObsidianNoteLink>>;
+  updateNode: (id: string, changes: Partial<ObsidianNoteNode>) => void;
 };
 
 export type AdjcacencyMap = { [key: string]: Set<string> };

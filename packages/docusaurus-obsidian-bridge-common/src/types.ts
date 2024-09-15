@@ -10,8 +10,6 @@ export type DocumentInfo = {
   internalLinks: string[];
 };
 
-// docusaurus-plugin-obsidian-bridge preprocesses all the markdowns and passes this output JSON to remark-docusaurus-obsidian-bridge for processing
-// Mainly used for internal links
 export type ObsidianVaultInfo = {
   documents: {
     [fileName: string]: DocumentInfo;

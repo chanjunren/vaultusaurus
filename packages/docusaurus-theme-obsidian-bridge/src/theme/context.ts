@@ -5,4 +5,5 @@ export const GraphContext = createContext<LocalGraphContext>({
   setHoveredNode: () => {},
   adjacencyMap: {},
   simulation: null,
+  updateNode: () => {},
 });

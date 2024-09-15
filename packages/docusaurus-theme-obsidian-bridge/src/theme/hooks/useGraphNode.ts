@@ -7,7 +7,7 @@ export default function useGraphNode(
   context: LocalGraphContext,
   node: ObsidianNoteNode
 ) {
-  const { hoveredNode, adjacencyMap, simulation } = context;
+  const { hoveredNode, adjacencyMap, simulation, updateNode } = context;
   const nodeRef = useRef(null);
 
   const imBeingHovered = hoveredNode?.id === node.id;
@@ -19,34 +19,32 @@ export default function useGraphNode(
 
   const focused = imBeingHovered || imTheNeighborOfTheOneBeingHovered;
 
-  function dragstarted(event) {
-    console.log("START", event);
+  function dragStarted(event) {
     if (!event.active) simulation.current.alphaTarget(0.3).restart();
-    event.subject.fx = event.subject.x;
-    event.subject.fy = event.subject.y;
+    updateNode(node.id, {
+      fx: event.x,
+      fy: event.y,
+    });
   }
-
-  // Update the subject (dragged node) position during drag.
   function dragged(event) {
-    console.log("DRAGGING");
-    event.subject.fx = event.x;
-    event.subject.fy = event.y;
+    updateNode(node.id, {
+      fx: event.x,
+      fy: event.y,
+    });
   }
 
-  // Restore the target alpha so the simulation cools after dragging ends.
-  // Unfix the subject position now that it’s no longer being dragged.
-  function dragended(event) {
-    console.log("END");
-    if (!event.active) simulation.current.alphaTarget(0);
-    event.subject.fx = null;
-    event.subject.fy = null;
+  function dragEnded() {
+    updateNode(node.id, {
+      fx: null,
+      fy: null,
+    });
   }
 
   useEffect(() => {
     if (nodeRef.current) {
       const currentNode = select(nodeRef.current);
       currentNode.call(
-        drag().on("start", dragstarted).on("drag", dragged).on("end", dragended)
+        drag().on("start", dragStarted).on("drag", dragged).on("end", dragEnded)
       );
     }
   }, [nodeRef.current]);
