@@ -12,7 +12,7 @@ type BridgeNodeProps = {
 const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
   const context = useContext(GraphContext);
   const { setHoveredNode } = context;
-  const { imBeingHovered, otherNodeIsHovered, focused } = useGraphNode(
+  const { imBeingHovered, otherNodeIsHovered, focused, nodeRef } = useGraphNode(
     context,
     node
   );
@@ -21,6 +21,7 @@ const BridgeNode: FC<BridgeNodeProps> = ({ node }) => {
     <>
       <a href={node.type === "DOCUMENT" ? node.path : undefined}>
         <circle
+          ref={nodeRef}
           className={styles.graphComponent}
           onMouseEnter={() => setHoveredNode(node)}
           onMouseLeave={() => imBeingHovered && setHoveredNode(null)}

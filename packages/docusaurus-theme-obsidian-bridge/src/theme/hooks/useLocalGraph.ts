@@ -14,8 +14,6 @@ const WIDTH = 240;
 const HEIGHT = 240;
 const LINK_DISTANCE = 50;
 
-function prepareGraph(rawData: GraphInfo) {}
-
 export default function useLocalGraph(rawData: GraphInfo) {
   const graphData = useMemo(() => structuredClone(rawData), [rawData]);
   const [nodes, setNodes] = useState<ObsidianNoteNode[]>(
