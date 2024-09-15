@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { GraphNodeLink } from "../../../../docusaurus-obsidian-bridge-common/src/types";
 import { AdjcacencyMap, ObsidianNoteNode } from "../types";
 
-export default function useGraphInteraction(links: GraphNodeLink[]) {
+export default function useHover(links: GraphNodeLink[]) {
   const [hoveredNode, setHoveredNode] = useState<ObsidianNoteNode>(null);
   const [adjacencyMap, setAdjacencyMap] = useState<AdjcacencyMap>({});
 

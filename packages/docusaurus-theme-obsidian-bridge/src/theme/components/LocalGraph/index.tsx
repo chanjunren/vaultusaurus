@@ -2,7 +2,7 @@ import { usePluginData } from "@docusaurus/useGlobalData";
 import { GraphInfo } from "../../../../../docusaurus-obsidian-bridge-common/src/types";
 import { GraphContext } from "../../context";
 import styles from "../../css/index.module.css";
-import useGraphInteraction from "../../hooks/useGraphInteraction";
+import useHover from "../../hooks/useHover";
 import useLocalGraph from "../../hooks/useLocalGraph";
 import BridgeLink from "./BridgeLink";
 import BridgeNode from "./BridgeNode";
@@ -23,9 +23,7 @@ export default function LocalGraph() {
   const links = rawData?.links || [];
 
   return (
-    <GraphContext.Provider
-      value={{ ...useGraphInteraction(links), simulation }}
-    >
+    <GraphContext.Provider value={{ ...useHover(links), simulation }}>
       <svg className={styles.container} viewBox={`0 0 300 300`}>
         {graphData.links.map((link, idx) => {
           return <BridgeLink key={`obsidian-link-${idx}`} link={link} />;
