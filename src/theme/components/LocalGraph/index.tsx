@@ -1,8 +1,8 @@
 import { usePluginData } from "@docusaurus/useGlobalData";
-import styles from "@theme/css/index.module.css";
 import { GraphInfo } from "@vaultsaurus/common/types";
 import { GraphLink, GraphNode } from "@vaultsaurus/theme/components";
 import { GraphContext } from "@vaultsaurus/theme/context";
+import styles from "@vaultsaurus/theme/css/index.module.css";
 import { useHover, useLocalGraph, useZoom } from "@vaultsaurus/theme/hooks";
 import { useRef } from "react";
 

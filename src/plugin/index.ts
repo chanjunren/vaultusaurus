@@ -1,11 +1,11 @@
 import { LoadContext, Plugin, PluginOptions } from "@docusaurus/types";
-import { REMARK_OBSIDIAN_BRIDGE_INPUT } from "@vaultsaurus/common/constants";
-import { ObsidianTagsInfo, ObsidianVaultInfo } from "@vaultsaurus/common/types";
-import { processFile } from "@vaultsaurus/plugin/mdast";
-import { postProcess } from "@vaultsaurus/plugin/postprocess";
 import { readFileSync } from "fs";
 import { globStreamSync } from "glob";
 import path from "path";
+import { REMARK_OBSIDIAN_BRIDGE_INPUT } from "../common/constants";
+import { ObsidianTagsInfo, ObsidianVaultInfo } from "../common/types";
+import { processFile } from "./mdast";
+import { postProcess } from "./postprocess";
 
 export default async function docusaurusPluginObsidianBridge(
   context: LoadContext,
@@ -46,6 +46,16 @@ export default async function docusaurusPluginObsidianBridge(
       } catch (err) {
         console.error("🐞", err);
       }
+    },
+
+    configureWebpack: () => {
+      return {
+        resolve: {
+          alias: {
+            "@vaultsaurus/common": path.resolve(__dirname, "../lib/common"),
+          },
+        },
+      };
     },
   };
 

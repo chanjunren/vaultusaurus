@@ -1,6 +1,6 @@
-import { OBSIDIAN_TAG_REGEX } from "@vaultsaurus/common/constants";
 import { Find, Replace } from "mdast-util-find-and-replace";
 import { u } from "unist-builder";
+import { OBSIDIAN_TAG_REGEX } from "../../common/constants";
 
 const tagReplacer: [Find, Replace?] = [
   OBSIDIAN_TAG_REGEX,

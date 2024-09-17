@@ -2,7 +2,7 @@ import { PluginContentLoadedActions } from "@docusaurus/types";
 import {
   OBSIDIAN_FILE_ID_PREFIX,
   OBSIDIAN_TAG_ID_PREFIX,
-} from "@vaultsaurus/common/constants";
+} from "../common/constants";
 import {
   AdjcacencyMap,
   GraphInfo,
@@ -10,7 +10,7 @@ import {
   GraphNodeLinkInfo,
   ObsidianTagsInfo,
   ObsidianVaultInfo,
-} from "@vaultsaurus/common/types";
+} from "../common/types";
 
 export function postProcess(
   tags: ObsidianTagsInfo,

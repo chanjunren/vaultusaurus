@@ -1,21 +1,21 @@
 import { Nodes } from "mdast";
 import { findAndReplace } from "mdast-util-find-and-replace";
 
+import { RemarkDocusaurusObsidianBridgeOptions } from "@vaultsaurus/remark/options";
+import fs from "fs";
+import path from "path";
+import { map } from "unist-util-map";
 import {
   OBSIDIAN_BRIDGE_PLUGIN_FILES_PREFIX,
   REMARK_OBSIDIAN_BRIDGE_INPUT,
-} from "@vaultsaurus/common/constants";
-import { ObsidianVaultInfo } from "@vaultsaurus/common/types";
+} from "../common/constants";
+import { ObsidianVaultInfo } from "../common/types";
 import {
   admonitionMapper,
   imageReplacer,
   internalLinkReplacer,
   tagReplacer,
-} from "@vaultsaurus/remark/core";
-import { RemarkDocusaurusObsidianBridgeOptions } from "@vaultsaurus/remark/options";
-import fs from "fs";
-import path from "path";
-import { map } from "unist-util-map";
+} from "./core";
 
 export default function convertToDocusaurusMdx(
   options: RemarkDocusaurusObsidianBridgeOptions
