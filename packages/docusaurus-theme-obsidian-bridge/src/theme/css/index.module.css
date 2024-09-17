@@ -6,5 +6,5 @@
 }
 
 .graphComponent {
-    transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease;
+    transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }

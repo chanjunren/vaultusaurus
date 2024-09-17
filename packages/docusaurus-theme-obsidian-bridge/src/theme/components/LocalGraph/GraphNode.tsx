@@ -36,6 +36,8 @@ const GraphNode: FC<GraphNodeProps> = ({ node }) => {
           r={5}
           cx={node.x}
           cy={node.y}
+          transform={`scale(${imBeingHovered ? 1.5 : 1})`}
+          transform-origin={`${node.x}px ${node.y}px`}
         />
       </a>
       <text
