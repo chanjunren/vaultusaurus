@@ -1,0 +1,36 @@
+{
+  "name": "vaultsaurus",
+  "version": "1.0.0",
+  "description": "Utilities for publishing Obsidian markdown documents to Docusaurus",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "chanjunren",
+  "license": "MIT",
+  "types": "./index.d.ts",
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^3.5.2",
+    "@docusaurus/tsconfig": "^3.5.2",
+    "@docusaurus/types": "^3.5.2",
+    "@types/d3": "^7.4.3",
+    "@types/d3-force": "^3.0.10",
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^22.5.5",
+    "@types/react": "^18.3.7",
+    "@types/unist": "^3.0.3"
+  },
+  "dependencies": {
+    "d3-drag": "^3.0.0",
+    "d3-force": "^3.0.0",
+    "d3-selection": "^3.0.0",
+    "d3-zoom": "^3.0.0",
+    "glob": "^11.0.0",
+    "mdast-util-find-and-replace": "^3.0.1",
+    "mdast-util-from-markdown": "^2.0.1",
+    "path": "^0.12.7",
+    "react": "^18.3.1",
+    "unist-builder": "^4.0.0",
+    "unist-util-map": "^4.0.0"
+  }
+}

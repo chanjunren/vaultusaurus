@@ -1,7 +1,0 @@
-{
-  "esModuleInterop": true,
-  "compilerOptions": {
-    "downlevelIteration": true,
-    "lib": ["ES2015"]
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "devDependencies": {
-    "@types/d3-force": "^3.0.10",
-    "@types/node": "^22.5.1",
-    "@types/react": "^18.3.5"
-  }
-}

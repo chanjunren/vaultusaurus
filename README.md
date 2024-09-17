@@ -52,3 +52,18 @@ npm i remark-docusaurus-obsidian-bridge docusaurus-plugin-obsidian-bridge
 |---------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
 | [remark-docusaurus-obsidian-bridge](https://github.com/chanjunren/docusaurus-obsidian-bridge/tree/master/remark-docusaurus-obsidian-bridge) | A Remark plugin to transform Obsidian-specific Markdown syntax into Docusaurus-compatible syntax |
 | [docusaurus-plugin-obsidian-bridge](https://github.com/chanjunren/docusaurus-obsidian-bridge/tree/master/packages/docusaurus-plugin-obsidian-bridge) | A Docusaurus plugin that preprocesses your docusaurus document files and outputs data that is used by `remark-docusaurus-obsidian-bridge` |
+
+## 📚 Resources
+
+- [Docusaurus's official documentation](https://docusaurus.io/docs/markdown-features/plugins)
+- [mdast](https://github.com/syntax-tree/mdast)
+- [mdast-util-find-and-replace](https://github.com/syntax-tree/mdast-util-find-and-replace)
+- [unist-util-map](https://github.com/syntax-tree/unist-util-map)
+- [unist-builder](https://github.com/syntax-tree/mdast-util-from-markdown)
+
+## 📄 License
+
+[MIT][license] © [Chan Jun Ren][author]
+
+[license]: license
+[author]: https://chanjunren.github.io
