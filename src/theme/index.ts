@@ -3,7 +3,7 @@ import path from "path";
 
 export default function docusaurusThemeObsidianBridge(): Plugin<void> {
   return {
-    name: "docusaurus-theme-obsidian-bridge",
+    name: "docusaurus-theme-vaultusaurus",
     getThemePath() {
       return path.join(__dirname, "..", "lib", "theme");
     },
@@ -14,8 +14,8 @@ export default function docusaurusThemeObsidianBridge(): Plugin<void> {
       return {
         resolve: {
           alias: {
-            "@vaultsaurus/theme": path.resolve(__dirname, "../theme"),
-            "@vaultsaurus/common": path.resolve(__dirname, "../common"),
+            "@vaultusaurus/theme": path.resolve(__dirname, "../theme"),
+            "@vaultusaurus/common": path.resolve(__dirname, "../common"),
           },
         },
       };

@@ -1,13 +1,13 @@
 import { Nodes } from "mdast";
 import { findAndReplace } from "mdast-util-find-and-replace";
 
-import { RemarkDocusaurusObsidianBridgeOptions } from "@vaultsaurus/remark/options";
+import { RemarkVaultusaurusOptions } from "@vaultusaurus/remark/options";
 import fs from "fs";
 import path from "path";
 import { map } from "unist-util-map";
 import {
-  OBSIDIAN_BRIDGE_PLUGIN_FILES_PREFIX,
-  REMARK_OBSIDIAN_BRIDGE_INPUT,
+  REMARK_VAULTUSAURUS_INPUT,
+  VAULTUSAURUS_PLUGIN_FILES_PREFIX,
 } from "../common/constants";
 import { ObsidianVaultInfo } from "../common/types";
 import {
@@ -18,11 +18,11 @@ import {
 } from "./core";
 
 export default function convertToDocusaurusMdx(
-  options: RemarkDocusaurusObsidianBridgeOptions
+  options: RemarkVaultusaurusOptions
 ) {
   const metadataPath = path.join(
     process.env.PWD,
-    `${OBSIDIAN_BRIDGE_PLUGIN_FILES_PREFIX}/${REMARK_OBSIDIAN_BRIDGE_INPUT}`
+    `${VAULTUSAURUS_PLUGIN_FILES_PREFIX}/${REMARK_VAULTUSAURUS_INPUT}`
   );
   const metadata = retrieveMetadata();
 
@@ -41,7 +41,7 @@ export default function convertToDocusaurusMdx(
   function retrieveMetadata(): ObsidianVaultInfo {
     if (!fs.existsSync(metadataPath)) {
       throw new Error(
-        `🐞 Missing ${REMARK_OBSIDIAN_BRIDGE_INPUT} - Please use this plugin in conjunction with docusaurus-plugin-obsidian-bridge`
+        `🐞 Missing ${REMARK_VAULTUSAURUS_INPUT} - Please use this plugin in conjunction with docusaurus-plugin-obsidian-bridge`
       );
     }
 

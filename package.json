@@ -1,5 +1,5 @@
 {
-  "name": "vaultsaurus",
+  "name": "vaultusaurus",
   "version": "1.0.0",
   "description": "Utilities for publishing Obsidian markdown documents to Docusaurus",
   "main": "src/index.ts",

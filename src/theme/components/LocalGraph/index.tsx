@@ -1,9 +1,9 @@
 import { usePluginData } from "@docusaurus/useGlobalData";
-import { GraphInfo } from "@vaultsaurus/common/types";
-import { GraphLink, GraphNode } from "@vaultsaurus/theme/components";
-import { GraphContext } from "@vaultsaurus/theme/context";
-import styles from "@vaultsaurus/theme/css/index.module.css";
-import { useHover, useLocalGraph, useZoom } from "@vaultsaurus/theme/hooks";
+import { GraphInfo } from "@vaultusaurus/common/types";
+import { GraphLink, GraphNode } from "@vaultusaurus/theme/components";
+import { GraphContext } from "@vaultusaurus/theme/context";
+import styles from "@vaultusaurus/theme/css/index.module.css";
+import { useHover, useLocalGraph, useZoom } from "@vaultusaurus/theme/hooks";
 import { useRef } from "react";
 
 // TODO:
@@ -12,7 +12,7 @@ import { useRef } from "react";
 // - [ ] Custom popup when clicking on node
 
 export default function LocalGraph() {
-  const rawData: GraphInfo = usePluginData("docusaurus-plugin-obsidian-bridge")[
+  const rawData: GraphInfo = usePluginData("docusaurus-plugin-vaultusaurus")[
     window.location.pathname
   ];
 

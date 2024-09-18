@@ -1,5 +1,5 @@
 import { Find, Replace } from "mdast-util-find-and-replace";
 
-export interface RemarkDocusaurusObsidianBridgeOptions {
+export interface RemarkVaultusaurusOptions {
   customReplacers?: [Find, Replace?][];
 }

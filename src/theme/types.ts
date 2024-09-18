@@ -1,4 +1,4 @@
-import { AdjcacencyMap, GraphNodeInfo } from "@vaultsaurus/common/types";
+import { AdjcacencyMap, GraphNodeInfo } from "@vaultusaurus/common/types";
 import { Simulation, SimulationLinkDatum, SimulationNodeDatum } from "d3-force";
 import { MutableRefObject } from "react";
 

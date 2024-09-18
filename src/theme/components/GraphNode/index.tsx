@@ -1,11 +1,11 @@
-import { GraphContext } from "@vaultsaurus/theme/context";
-import styles from "@vaultsaurus/theme/css/index.module.css";
-import useGraphNode from "@vaultsaurus/theme/hooks/useGraphNode";
-import { ObsidianNoteNode } from "@vaultsaurus/theme/types";
+import { GraphContext } from "@vaultusaurus/theme/context";
+import styles from "@vaultusaurus/theme/css/index.module.css";
+import useGraphNode from "@vaultusaurus/theme/hooks/useGraphNode";
+import { ObsidianNoteNode } from "@vaultusaurus/theme/types";
 import {
   DEFAULT_PRIMARY_COLOR,
   DEFAULT_SECONDARY_COLOR,
-} from "@vaultsaurus/theme/utils";
+} from "@vaultusaurus/theme/utils";
 import { FC, useContext } from "react";
 
 type GraphNodeProps = {

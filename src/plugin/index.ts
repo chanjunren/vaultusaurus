@@ -2,7 +2,7 @@ import { LoadContext, Plugin, PluginOptions } from "@docusaurus/types";
 import { readFileSync } from "fs";
 import { globStreamSync } from "glob";
 import path from "path";
-import { REMARK_OBSIDIAN_BRIDGE_INPUT } from "../common/constants";
+import { REMARK_VAULTUSAURUS_INPUT } from "../common/constants";
 import { ObsidianTagsInfo, ObsidianVaultInfo } from "../common/types";
 import { processFile } from "./mdast";
 import { postProcess } from "./postprocess";
@@ -12,7 +12,7 @@ export default async function docusaurusPluginObsidianBridge(
   opts: PluginOptions
 ): Promise<Plugin> {
   return {
-    name: "docusaurus-plugin-obsidian-bridge",
+    name: "docusaurus-plugin-vaultusaurus",
 
     async contentLoaded({ actions }) {
       const { createData } = actions;
@@ -40,7 +40,7 @@ export default async function docusaurusPluginObsidianBridge(
         postProcess(tagsInfo, remarkPluginInput, actions);
 
         await createData(
-          REMARK_OBSIDIAN_BRIDGE_INPUT,
+          REMARK_VAULTUSAURUS_INPUT,
           JSON.stringify(remarkPluginInput)
         );
       } catch (err) {
@@ -52,7 +52,7 @@ export default async function docusaurusPluginObsidianBridge(
       return {
         resolve: {
           alias: {
-            "@vaultsaurus/common": path.resolve(__dirname, "../lib/common"),
+            "@vaultusaurus/common": path.resolve(__dirname, "../lib/common"),
           },
         },
       };

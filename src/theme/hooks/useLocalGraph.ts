@@ -1,5 +1,5 @@
-import { GraphInfo } from "@vaultsaurus/common/types";
-import { ObsidianNoteLink, ObsidianNoteNode } from "@vaultsaurus/theme/types";
+import { GraphInfo } from "@vaultusaurus/common/types";
+import { ObsidianNoteLink, ObsidianNoteNode } from "@vaultusaurus/theme/types";
 import {
   forceCenter,
   forceCollide,

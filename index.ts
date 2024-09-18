@@ -1,3 +1,3 @@
-export { default as docusaurusPluginVaultsaurus } from "./src/plugin";
-export { default as remarkVaultsaurus } from "./src/remark";
-export { default as docusaurusThemeVaultsaurus } from "./src/theme";
+export { default as docusaurusPluginVaultusaurus } from "./src/plugin";
+export { default as remarkVaultusaurus } from "./src/remark";
+export { default as docusaurusThemeVaultusaurus } from "./src/theme";

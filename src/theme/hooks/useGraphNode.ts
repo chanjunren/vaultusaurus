@@ -1,4 +1,4 @@
-import { LocalGraphContext, ObsidianNoteNode } from "@vaultsaurus/theme/types";
+import { LocalGraphContext, ObsidianNoteNode } from "@vaultusaurus/theme/types";
 import { drag } from "d3-drag";
 import { select } from "d3-selection";
 import { useEffect, useRef } from "react";
