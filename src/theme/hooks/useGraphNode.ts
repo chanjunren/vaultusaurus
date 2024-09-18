@@ -42,6 +42,7 @@ export default function useGraphNode(
 
   useEffect(() => {
     if (nodeRef.current) {
+      console.debug("SETTING_DRAG");
       const currentNode = select(nodeRef.current);
       currentNode.call(
         drag().on("start", dragStarted).on("drag", dragged).on("end", dragEnded)

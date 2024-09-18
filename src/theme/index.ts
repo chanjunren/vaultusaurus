@@ -11,11 +11,11 @@ export default function docusaurusThemeObsidianBridge(): Plugin<void> {
       return path.resolve(__dirname, "..", "src", "theme");
     },
     configureWebpack() {
+      console.log("THEMIE", path.resolve(__dirname, "theme"));
       return {
         resolve: {
           alias: {
-            "@vaultusaurus/theme": path.resolve(__dirname, "../theme"),
-            "@vaultusaurus/common": path.resolve(__dirname, "../common"),
+            "@vaultusaurus/theme": path.resolve(__dirname),
           },
         },
       };
