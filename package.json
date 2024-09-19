@@ -2,6 +2,13 @@
   "name": "vaultusaurus",
   "version": "1.0.0",
   "description": "Utilities for publishing Obsidian markdown documents to Docusaurus",
+  "keywords": [
+    "mdast",
+    "obsidian",
+    "docusaurus",
+    "markdown",
+    "remark"
+  ],
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc"

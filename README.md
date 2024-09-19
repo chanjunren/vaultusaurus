@@ -1,5 +1,10 @@
 # 🗃️ vaultusaurus
 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/chanjunren/vaultusaurus)
+![GitHub last commit](https://img.shields.io/github/last-commit/chanjunren/vaultusaurus)
+
+
+
 Tools for integrating a [Obsidian](https://obsidian.md/) Vault with a [Docusaurus](https://docusaurus.io/) website
 
 > [!NOTE]
