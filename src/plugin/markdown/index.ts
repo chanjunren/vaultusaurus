@@ -1,14 +1,11 @@
 import { LoadContext, PluginContentLoadedActions } from "@docusaurus/types";
-import { REMARK_VAULTUSAURUS_INPUT } from "@vaultusaurus/common/constants";
-import {
-  ObsidianTagsInfo,
-  ObsidianVaultInfo,
-} from "@vaultusaurus/common/types";
-import { processFile } from "@vaultusaurus/plugin/markdown/mdast";
-import { postProcess } from "@vaultusaurus/plugin/markdown/postprocess";
 import { readFileSync } from "fs";
 import { globStreamSync } from "glob";
 import path from "path";
+import { REMARK_VAULTUSAURUS_INPUT } from "../../common/constants";
+import { ObsidianTagsInfo, ObsidianVaultInfo } from "../../common/types";
+import { processFile } from "./mdast";
+import { postProcess } from "./postprocess";
 
 export default async function outputDataForThemeAndRemarkPlugin(
   context: LoadContext,

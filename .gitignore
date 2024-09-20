@@ -2,3 +2,4 @@ vaultusaurus.wiki
 node_modules
 lib
 tsconfig.tsbuildinfo
+*.tgz
