@@ -1,6 +1,6 @@
 {
   "name": "vaultusaurus",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Utilities for publishing Obsidian markdown documents to Docusaurus",
   "keywords": [
     "mdast",
@@ -9,13 +9,14 @@
     "markdown",
     "remark"
   ],
-  "main": "src/index.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc; mkdir ./lib/plugin/css; cp ./src/plugin/css ./lib/plugin -r;",
+    "cleanup": "rm package-lock.json lib tsconfig.tsbuildinfo -rf"
   },
   "author": "chanjunren",
   "license": "MIT",
-  "types": "./index.d.ts",
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.5.2",
     "@docusaurus/tsconfig": "^3.5.2",

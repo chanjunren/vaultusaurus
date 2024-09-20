@@ -1,5 +1,5 @@
 import { AdjcacencyMap, GraphNodeLinkInfo } from "@vaultusaurus/common/types";
-import { ObsidianNoteNode } from "@vaultusaurus/theme/types";
+import { ObsidianNoteNode } from "@vaultusaurus/plugin/types";
 import { useEffect, useState } from "react";
 
 export default function useHover(links: GraphNodeLinkInfo[]) {

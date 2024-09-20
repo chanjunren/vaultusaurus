@@ -1,9 +1,10 @@
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { GraphInfo } from "@vaultusaurus/common/types";
-import { GraphLink, GraphNode } from "@vaultusaurus/theme/components";
-import { GraphContext } from "@vaultusaurus/theme/context";
-import styles from "@vaultusaurus/theme/css/index.module.css";
-import { useHover, useLocalGraph, useZoom } from "@vaultusaurus/theme/hooks";
+import { GraphContext } from "@vaultusaurus/plugin/context";
+import styles from "@vaultusaurus/plugin/css/index.module.css";
+import { useHover, useLocalGraph, useZoom } from "@vaultusaurus/plugin/hooks";
+import GraphLink from "@vaultusaurus/plugin/theme/GraphLink";
+import GraphNode from "@vaultusaurus/plugin/theme/GraphNode";
 import { useRef } from "react";
 
 // TODO:

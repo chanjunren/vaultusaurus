@@ -1,7 +1,7 @@
-import { GraphContext } from "@vaultusaurus/theme/context";
-import styles from "@vaultusaurus/theme/css/index.module.css";
-import { ObsidianNoteLink, ObsidianNoteNode } from "@vaultusaurus/theme/types";
-import { DEFAULT_SECONDARY_COLOR } from "@vaultusaurus/theme/utils";
+import { GraphContext } from "@vaultusaurus/plugin/context";
+import styles from "@vaultusaurus/plugin/css/index.module.css";
+import { ObsidianNoteLink, ObsidianNoteNode } from "@vaultusaurus/plugin/types";
+import { DEFAULT_SECONDARY_COLOR } from "@vaultusaurus/plugin/utils";
 import { FC, useContext } from "react";
 
 type GraphLinkProps = {

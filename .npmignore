@@ -1,0 +1,7 @@
+.gitignore
+assets
+.github
+node_modules
+tsconfig.json
+tsconfig.tsbuildinfo
+src

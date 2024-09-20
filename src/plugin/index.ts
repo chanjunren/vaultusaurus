@@ -7,7 +7,7 @@ import { ObsidianTagsInfo, ObsidianVaultInfo } from "../common/types";
 import { processFile } from "./mdast";
 import { postProcess } from "./postprocess";
 
-export default async function docusaurusPluginObsidianBridge(
+export default async function docusaurusPluginVaultusaurus(
   context: LoadContext,
   opts: PluginOptions
 ): Promise<Plugin> {
@@ -48,11 +48,19 @@ export default async function docusaurusPluginObsidianBridge(
       }
     },
 
-    configureWebpack: () => {
+    getThemePath() {
+      return path.join(__dirname, "theme");
+    },
+
+    getTypeScriptThemePath() {
+      return path.resolve(__dirname, "theme");
+    },
+
+    configureWebpack() {
       return {
         resolve: {
           alias: {
-            "@vaultusaurus/common": path.resolve(__dirname, "../lib/common"),
+            "@vaultusaurus": path.resolve(__dirname, ".."),
           },
         },
       };
