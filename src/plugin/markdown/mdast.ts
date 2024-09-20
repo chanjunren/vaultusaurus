@@ -1,11 +1,14 @@
-import { Text } from "mdast";
-import { fromMarkdown } from "mdast-util-from-markdown";
-import { visit } from "unist-util-visit";
 import {
   OBSIDIAN_INTERNAL_LINK_REGEX,
   OBSIDIAN_TAG_REGEX,
-} from "../common/constants";
-import { ObsidianTagsInfo, ObsidianVaultInfo } from "../common/types";
+} from "@vaultusaurus/common/constants";
+import {
+  ObsidianTagsInfo,
+  ObsidianVaultInfo,
+} from "@vaultusaurus/common/types";
+import { Text } from "mdast";
+import { fromMarkdown } from "mdast-util-from-markdown";
+import { visit } from "unist-util-visit";
 
 export function processFile(
   input: ObsidianVaultInfo,
