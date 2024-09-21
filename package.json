@@ -14,7 +14,7 @@
   "scripts": {
     "build": "npm run cleanup && tsc",
     "postbuild": "mkdir ./lib/plugin/css; cp ./src/plugin/css ./lib/plugin -r;",
-    "cleanup": "rm package-lock.json lib tsconfig.tsbuildinfo vaultusaurus-1.0.3.tgz -rf",
+    "cleanup": "rm lib tsconfig.tsbuildinfo vaultusaurus-1.0.3.tgz -rf",
     "pack": "npm run build && npm pack"
   },
   "author": "chanjunren",
