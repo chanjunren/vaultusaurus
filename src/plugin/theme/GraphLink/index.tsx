@@ -2,13 +2,13 @@ import { GraphContext } from "@vaultusaurus/plugin/context";
 import styles from "@vaultusaurus/plugin/css/index.module.css";
 import { ObsidianNoteLink, ObsidianNoteNode } from "@vaultusaurus/plugin/types";
 import { DEFAULT_SECONDARY_COLOR } from "@vaultusaurus/plugin/utils";
-import { FC, useContext } from "react";
+import { useContext } from "react";
 
 type GraphLinkProps = {
   link: ObsidianNoteLink;
 };
 
-const GraphLink: FC<GraphLinkProps> = ({ link }) => {
+export default function GraphLink({ link }: GraphLinkProps) {
   const source = link.source as ObsidianNoteNode;
   const target = link.target as ObsidianNoteNode;
   const { hoveredNode } = useContext(GraphContext);
@@ -30,6 +30,4 @@ const GraphLink: FC<GraphLinkProps> = ({ link }) => {
       y2={target.y}
     />
   );
-};
-
-export default GraphLink;
+}

@@ -6,13 +6,13 @@ import {
   DEFAULT_PRIMARY_COLOR,
   DEFAULT_SECONDARY_COLOR,
 } from "@vaultusaurus/plugin/utils";
-import { FC, useContext } from "react";
+import { useContext } from "react";
 
 type GraphNodeProps = {
   node: ObsidianNoteNode;
 };
 
-const GraphNode: FC<GraphNodeProps> = ({ node }) => {
+export default function GraphNode({ node }: GraphNodeProps) {
   const context = useContext(GraphContext);
   const { setHoveredNode } = context;
   const { imBeingHovered, otherNodeIsHovered, focused, nodeRef } = useGraphNode(
@@ -56,6 +56,4 @@ const GraphNode: FC<GraphNodeProps> = ({ node }) => {
       </text>
     </>
   ) : null;
-};
-
-export default GraphNode;
+}

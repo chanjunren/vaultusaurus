@@ -4,4 +4,3 @@ assets
 node_modules
 tsconfig.json
 tsconfig.tsbuildinfo
-src

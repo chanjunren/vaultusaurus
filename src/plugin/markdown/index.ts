@@ -1,4 +1,5 @@
 import { LoadContext, PluginContentLoadedActions } from "@docusaurus/types";
+import VaultusaurusPluginOptions from "@vaultusaurus/plugin/options";
 import { readFileSync } from "fs";
 import { globStreamSync } from "glob";
 import path from "path";
@@ -9,7 +10,8 @@ import { postProcess } from "./postprocess";
 
 export default async function outputDataForThemeAndRemarkPlugin(
   context: LoadContext,
-  actions: PluginContentLoadedActions
+  actions: PluginContentLoadedActions,
+  options: VaultusaurusPluginOptions
 ) {
   const { createData } = actions;
   const docsDirectory = path.join(context.siteDir, "docs");
