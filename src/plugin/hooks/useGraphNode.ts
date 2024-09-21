@@ -23,13 +23,16 @@ export default function useGraphNode(
   const focused = imBeingHovered || imTheNeighborOfTheOneBeingHovered;
 
   function dragStarted(event) {
-    if (!event.active) simulation.current.alphaTarget(0.1).restart();
+    console.debug("DRAG_START");
+    if (!event.active && simulation.current)
+      simulation.current.alphaTarget(0.1).restart();
     updateNode(node.id, {
       fx: event.x,
       fy: event.y,
     });
   }
   function dragged(event) {
+    console.debug("DRAGGING");
     updateNode(node.id, {
       fx: event.x,
       fy: event.y,
@@ -37,6 +40,7 @@ export default function useGraphNode(
   }
 
   function dragEnded() {
+    console.debug("DRAG_END");
     updateNode(node.id, {
       fx: null,
       fy: null,
@@ -45,7 +49,6 @@ export default function useGraphNode(
 
   useEffect(() => {
     if (nodeRef.current) {
-      console.debug("SETTING_DRAG");
       const currentNode = select(nodeRef.current);
       currentNode.call(
         drag().on("start", dragStarted).on("drag", dragged).on("end", dragEnded)
