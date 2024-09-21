@@ -47,8 +47,6 @@ function buildGraphInfo(
   const adjacencyMap: AdjcacencyMap = {};
   const tagsToIgnore = new Set(options.ignoredGraphTags || []);
 
-  console.log("TAGS_TO_IGNORE", tagsToIgnore);
-
   const queue: GraphNodeInfo[] = [
     {
       id: `${OBSIDIAN_FILE_ID_PREFIX}__${relativePath}`,
