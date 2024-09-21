@@ -11,16 +11,24 @@ import {
   ObsidianTagsInfo,
   ObsidianVaultInfo,
 } from "../../common/types";
+import VaultusaurusPluginOptions from "../options";
 
 export function postProcess(
   tags: ObsidianTagsInfo,
   vault: ObsidianVaultInfo,
-  { setGlobalData }: PluginContentLoadedActions
+  { setGlobalData }: PluginContentLoadedActions,
+  options: VaultusaurusPluginOptions
 ) {
   const graphInfoMap: { [filePath: string]: GraphInfo } = {};
   Object.keys(vault.documents).forEach(async (fileName) => {
     const relativePath = vault.documents[fileName].relativeFilePath;
-    const graphInfo = buildGraphInfo(vault, fileName, tags, relativePath);
+    const graphInfo = buildGraphInfo(
+      vault,
+      fileName,
+      tags,
+      relativePath,
+      options
+    );
     graphInfoMap[relativePath] = graphInfo;
   });
 
@@ -31,11 +39,15 @@ function buildGraphInfo(
   vault: ObsidianVaultInfo,
   fileName: string,
   tags: ObsidianTagsInfo,
-  relativePath: string
+  relativePath: string,
+  options: VaultusaurusPluginOptions
 ): GraphInfo {
   const visitedDocuments: Set<string> = new Set([]);
   const visitedTags: Set<string> = new Set([]);
   const adjacencyMap: AdjcacencyMap = {};
+  const tagsToIgnore = new Set(options.ignoredGraphTags || []);
+
+  console.log("TAGS_TO_IGNORE", tagsToIgnore);
 
   const queue: GraphNodeInfo[] = [
     {
@@ -60,7 +72,14 @@ function buildGraphInfo(
     markAsVisited(currentNode, visitedDocuments, visitedTags);
 
     if (currentNode.type === "DOCUMENT") {
-      handleDocumentTags(currentNode, queue, links, vault, adjacencyMap);
+      handleDocumentTags(
+        currentNode,
+        queue,
+        links,
+        vault,
+        adjacencyMap,
+        tagsToIgnore
+      );
       handleInternalLinks(currentNode, queue, links, vault, adjacencyMap);
     } else if (currentNode.type === "TAG") {
       handleTaggedDocuments(
@@ -69,7 +88,8 @@ function buildGraphInfo(
         links,
         vault,
         tags,
-        adjacencyMap
+        adjacencyMap,
+        tagsToIgnore
       );
     }
   }
@@ -154,9 +174,14 @@ function handleDocumentTags(
   queue: GraphNodeInfo[],
   links: GraphNodeLinkInfo[],
   vault: ObsidianVaultInfo,
-  adjacencyMap: AdjcacencyMap
+  adjacencyMap: AdjcacencyMap,
+  tagsToIgnore: Set<string>
 ) {
   vault.documents[currentNode.label].tags.forEach((tag) => {
+    if (tagsToIgnore.has(tag)) {
+      return;
+    }
+
     const tagNodeId = `${OBSIDIAN_TAG_ID_PREFIX}__${tag}`;
     queue.push({
       id: tagNodeId,
@@ -195,8 +220,13 @@ function handleTaggedDocuments(
   links: GraphNodeLinkInfo[],
   vault: ObsidianVaultInfo,
   tags: ObsidianTagsInfo,
-  adjacencyMap: AdjcacencyMap
+  adjacencyMap: AdjcacencyMap,
+  tagsToIgnore: Set<string>
 ) {
+  if (tagsToIgnore.has(currentNode.label)) {
+    return;
+  }
+
   tags[currentNode.label].linkedDocuments.forEach((linkedDocument) => {
     const linkedDocumentId = `${OBSIDIAN_FILE_ID_PREFIX}__${vault.documents[linkedDocument].relativeFilePath}`;
 

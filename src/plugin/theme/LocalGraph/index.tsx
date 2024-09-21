@@ -5,14 +5,14 @@ import styles from "@vaultusaurus/plugin/css/index.module.css";
 import { useHover, useLocalGraph, useZoom } from "@vaultusaurus/plugin/hooks";
 import GraphLink from "@vaultusaurus/plugin/theme/GraphLink";
 import GraphNode from "@vaultusaurus/plugin/theme/GraphNode";
-import { useRef } from "react";
+import { ReactElement, useRef } from "react";
 
 // TODO:
 // - [ ] Customizations
 // - [ ] Modal
 // - [ ] Custom popup when clicking on node
 
-export default function LocalGraph() {
+export default function LocalGraph(): ReactElement {
   const rawData: GraphInfo = usePluginData("docusaurus-plugin-vaultusaurus")[
     window.location.pathname
   ];

@@ -1,5 +1,5 @@
 type VaultusaurusPluginOptions = {
-  ignoredTags?: string[];
+  ignoredGraphTags?: string[];
 };
 
 export default VaultusaurusPluginOptions;

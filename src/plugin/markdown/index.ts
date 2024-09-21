@@ -35,7 +35,7 @@ export default async function outputDataForThemeAndRemarkPlugin(
     );
 
     // Can only be done after all markdown files have been pre-processed
-    postProcess(tagsInfo, remarkPluginInput, actions);
+    postProcess(tagsInfo, remarkPluginInput, actions, options);
 
     await createData(
       REMARK_VAULTUSAURUS_INPUT,
