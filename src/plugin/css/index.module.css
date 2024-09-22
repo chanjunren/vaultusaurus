@@ -1,8 +1,8 @@
 .container {
     background: #272b4d;
-    width: 230px;
-    height: 230px;
+    aspect-ratio: 1 / 1;
     border-radius: 8px;
+    margin-right: 0.5rem;
 }
 
 .graphComponent {
