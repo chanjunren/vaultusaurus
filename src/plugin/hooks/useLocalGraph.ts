@@ -8,7 +8,7 @@ import {
   forceSimulation,
   Simulation,
 } from "d3-force";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const WIDTH = 240;
 const HEIGHT = 240;
@@ -27,19 +27,6 @@ export default function useLocalGraph(rawData: GraphInfo) {
 
   const simulation =
     useRef<Simulation<ObsidianNoteNode, ObsidianNoteLink>>(null);
-
-  const updateNode = useCallback(
-    (nodeId: string, changes: Partial<ObsidianNoteNode>) => {
-      setNodes((current) => ({
-        ...current,
-        [nodeId]: {
-          ...current[nodeId],
-          ...changes,
-        },
-      }));
-    },
-    []
-  );
 
   useEffect(() => {
     if (!graphData?.nodes) {
@@ -73,7 +60,7 @@ export default function useLocalGraph(rawData: GraphInfo) {
     };
   }, [graphData]);
 
-  return { nodes, links, simulation, updateNode };
+  return { nodes, links, simulation };
 }
 
 function toNodeMap(nodes: ObsidianNoteNode[]) {

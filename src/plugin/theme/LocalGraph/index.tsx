@@ -17,15 +17,13 @@ export default function LocalGraph(): ReactElement {
     window.location.pathname
   ];
 
-  const { nodes, links, simulation, updateNode } = useLocalGraph(rawData);
+  const { nodes, links, simulation } = useLocalGraph(rawData);
   const container = useRef(null);
   const { transform } = useZoom(container);
   const rawLinks = rawData?.links || [];
 
   return (
-    <GraphContext.Provider
-      value={{ ...useHover(rawLinks), simulation, updateNode }}
-    >
+    <GraphContext.Provider value={{ ...useHover(rawLinks), simulation }}>
       <svg className={styles.container} viewBox={`0 0 300 300`} ref={container}>
         <g transform={transform}>
           {links.map((link, idx) => {

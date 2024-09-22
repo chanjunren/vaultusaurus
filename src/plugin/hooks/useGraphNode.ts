@@ -4,13 +4,13 @@ import {
 } from "@vaultusaurus/plugin/types";
 import { drag } from "d3-drag";
 import { select } from "d3-selection";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export default function useGraphNode(
   context: LocalGraphContext,
   node: ObsidianNoteNode
 ) {
-  const { hoveredNode, adjacencyMap, simulation, updateNode } = context;
+  const { hoveredNode, adjacencyMap, simulation } = context;
   const nodeRef = useRef(null);
 
   const imBeingHovered = hoveredNode?.id === node.id;
@@ -22,23 +22,23 @@ export default function useGraphNode(
 
   const focused = imBeingHovered || imTheNeighborOfTheOneBeingHovered;
 
-  function dragStarted(event) {
+  const dragStarted = useCallback((event) => {
     if (!event.active && simulation.current) {
       simulation.current.alphaTarget(1).restart();
     }
     event.subject.fx = event.x;
     event.subject.fy = event.y;
-  }
+  }, []);
 
-  function dragged(event) {
+  const dragged = useCallback((event) => {
     event.subject.fx = event.x;
     event.subject.fy = event.y;
-  }
+  }, []);
 
-  function dragEnded(event) {
+  const dragEnded = useCallback((event) => {
     event.subject.fx = null;
     event.subject.fy = null;
-  }
+  }, []);
 
   useEffect(() => {
     const currentNode = nodeRef.current ? select(nodeRef.current) : undefined;
