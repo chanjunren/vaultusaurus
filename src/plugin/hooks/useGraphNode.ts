@@ -26,29 +26,26 @@ export default function useGraphNode(
     if (!event.active && simulation.current) {
       simulation.current.alphaTarget(1).restart();
     }
-    updateNode(node.id, {
-      fx: event.x,
-      fy: event.y,
-    });
+    event.subject.fx = event.x;
+    event.subject.fy = event.y;
   }
 
   function dragged(event) {
-    updateNode(node.id, {
-      fx: event.x,
-      fy: event.y,
-    });
+    event.subject.fx = event.x;
+    event.subject.fy = event.y;
   }
 
-  function dragEnded() {
-    updateNode(node.id, {
-      fx: null,
-      fy: null,
-    });
+  function dragEnded(event) {
+    event.subject.fx = null;
+    event.subject.fy = null;
   }
 
   useEffect(() => {
     const currentNode = nodeRef.current ? select(nodeRef.current) : undefined;
+
     if (currentNode) {
+      currentNode.datum(node);
+
       const dragBehavior = drag()
         .on("start", dragStarted)
         .on("drag", dragged)
