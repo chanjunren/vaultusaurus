@@ -10,7 +10,7 @@ Tools for integrating a [Obsidian](https://obsidian.md/) Vault with a [Docusauru
 > [!NOTE]
 > This is a personal project developed for my notes [repository](https://chanjunren.github.io)
 >
-> Feel free to use it at your own discretion, and let me know if you have feature suggestions or would like to contribute!
+> Feel free to use it at your own discretion, and let me know if you have feature suggestions or would like to contribute
 
 ## ✨ Features
 
@@ -26,7 +26,7 @@ Tools for integrating a [Obsidian](https://obsidian.md/) Vault with a [Docusauru
 
 - Local graph view
 
-<img alt="Local graph view" src="https://raw.githubusercontent.com/chanjunren/vaultusaurus/master/assets/local_graph_view.png" width="200px">
+<img alt="Local graph view" src="https://raw.githubusercontent.com/chanjunren/vaultusaurus/master/assets/vaultusaurus_demo.png" width="200px">
 
 ## 🔗 Links
 
