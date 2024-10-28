@@ -12,16 +12,20 @@ export default function GraphLink({ link }: GraphLinkProps) {
   const source = link.source as ObsidianNoteNode;
   const target = link.target as ObsidianNoteNode;
   const { hoveredNode } = useContext(GraphContext);
-  const someNodeisHovered = hoveredNode?.id;
+  const someNodeIsHovered = hoveredNode?.id;
   const focused =
-    someNodeisHovered &&
+    someNodeIsHovered &&
     (hoveredNode.id === source.id || hoveredNode.id === target.id);
+
+  if (!source || !target) {
+    return null;
+  }
 
   return (
     <line
       stroke={DEFAULT_SECONDARY_COLOR}
       className={styles.graphComponent}
-      opacity={someNodeisHovered && !focused ? 0.2 : 0.6}
+      opacity={someNodeIsHovered && !focused ? 0.2 : 0.6}
       strokeWidth={1}
       strokeOpacity={1}
       x1={source.x}
