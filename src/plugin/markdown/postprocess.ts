@@ -3,6 +3,7 @@ import {
   OBSIDIAN_FILE_ID_PREFIX,
   OBSIDIAN_TAG_ID_PREFIX,
 } from "../../common/constants";
+import { VaultusaurusPluginOptions } from "../../common/options";
 import {
   AdjcacencyMap,
   GraphInfo,
@@ -10,10 +11,10 @@ import {
   GraphNodeLinkInfo,
   ObsidianTagsInfo,
   ObsidianVaultInfo,
+  VaultusaurusGlobalData,
 } from "../../common/types";
-import VaultusaurusPluginOptions from "../options";
 
-export function postProcess(
+export function buildAndSetGlobalData(
   tags: ObsidianTagsInfo,
   vault: ObsidianVaultInfo,
   { setGlobalData }: PluginContentLoadedActions,
@@ -32,7 +33,12 @@ export function postProcess(
     graphInfoMap[relativePath] = graphInfo;
   });
 
-  setGlobalData(graphInfoMap);
+  const globalData: VaultusaurusGlobalData = {
+    graphInfo: graphInfoMap,
+    graphStyle: options.graphStyle || {},
+  };
+
+  setGlobalData(globalData);
 }
 
 function buildGraphInfo(

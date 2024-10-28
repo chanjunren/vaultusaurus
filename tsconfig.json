@@ -30,5 +30,6 @@
       "@vaultusaurus/*": ["./src/*"],
       "@theme/*": ["./src/plugin/theme/*"]
     }
-  }
+  },
+  "include": ["src/**/*"]
 }

@@ -1,5 +1,5 @@
 .container {
-    background: #272b4d;
+    background: var(--graph-bg);
     aspect-ratio: 1 / 1;
     border-radius: 8px;
     margin-right: 0.5rem;

@@ -1,3 +1,5 @@
+import { GraphStyle } from "./options";
+
 export type ObsidianTagInfo = {
   linkedDocuments: string[];
 };
@@ -35,6 +37,13 @@ export type GraphInfo = {
   nodes: GraphNodeInfo[];
 };
 
+export type GraphInfoMap = { [filePath: string]: GraphInfo };
+
 export type AdjcacencyMap = {
   [key: string]: Set<string>;
+};
+
+export type VaultusaurusGlobalData = {
+  graphInfo: GraphInfoMap;
+  graphStyle: GraphStyle;
 };

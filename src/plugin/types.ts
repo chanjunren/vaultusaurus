@@ -1,3 +1,4 @@
+import { GraphStyle } from "@vaultusaurus/common/options";
 import { AdjcacencyMap, GraphNodeInfo } from "@vaultusaurus/common/types";
 import { Simulation, SimulationLinkDatum, SimulationNodeDatum } from "d3-force";
 import { MutableRefObject } from "react";
@@ -10,4 +11,5 @@ export type LocalGraphContext = {
   setHoveredNode: (node: ObsidianNoteNode) => void;
   adjacencyMap: AdjcacencyMap;
   simulation: MutableRefObject<Simulation<ObsidianNoteNode, ObsidianNoteLink>>;
+  graphStyle: GraphStyle;
 };

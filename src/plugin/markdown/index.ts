@@ -1,12 +1,12 @@
 import { LoadContext, PluginContentLoadedActions } from "@docusaurus/types";
-import VaultusaurusPluginOptions from "@vaultusaurus/plugin/options";
+import { VaultusaurusPluginOptions } from "@vaultusaurus/common/options";
 import { readFileSync } from "fs";
 import { globStreamSync } from "glob";
 import path from "path";
 import { REMARK_VAULTUSAURUS_INPUT } from "../../common/constants";
 import { ObsidianTagsInfo, ObsidianVaultInfo } from "../../common/types";
 import { processFile } from "./mdast";
-import { postProcess } from "./postprocess";
+import { buildAndSetGlobalData } from "./postprocess";
 
 export default async function outputDataForThemeAndRemarkPlugin(
   context: LoadContext,
@@ -35,7 +35,7 @@ export default async function outputDataForThemeAndRemarkPlugin(
     );
 
     // Can only be done after all markdown files have been pre-processed
-    postProcess(tagsInfo, remarkPluginInput, actions, options);
+    buildAndSetGlobalData(tagsInfo, remarkPluginInput, actions, options);
 
     await createData(
       REMARK_VAULTUSAURUS_INPUT,
