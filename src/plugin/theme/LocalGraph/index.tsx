@@ -12,22 +12,22 @@ import {
 } from "@vaultusaurus/plugin/utils";
 import { ReactElement, useRef } from "react";
 
-// TODO:
-// - [ ] Customizations
-// - [ ] Modal
-// - [ ] Custom popup when clicking on node
-
 export default function LocalGraph(): ReactElement {
   const globalData = usePluginData(
     "docusaurus-plugin-vaultusaurus"
   ) as VaultusaurusGlobalData;
-  const rawData: GraphInfo = globalData.graphInfo[window.location.pathname];
+  const graphInfo: GraphInfo = globalData.graphInfo[window.location.pathname];
+
+  if (!graphInfo) {
+    return null;
+  }
+
   const inputGraphStyle = globalData.graphStyle;
 
-  const { nodes, links, simulation } = useLocalGraph(rawData);
+  const { nodes, links, simulation } = useLocalGraph(graphInfo);
   const container = useRef(null);
   const { transform } = useZoom(container);
-  const rawLinks = rawData?.links || [];
+  const rawLinks = graphInfo?.links || [];
 
   return (
     <GraphContext.Provider
