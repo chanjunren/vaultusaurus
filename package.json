@@ -1,6 +1,6 @@
 {
   "name": "vaultusaurus",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Utilities for publishing Obsidian markdown documents to Docusaurus",
   "keywords": [
     "mdast",
