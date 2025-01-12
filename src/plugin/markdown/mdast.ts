@@ -5,6 +5,7 @@ import {
   OBSIDIAN_TAG_REGEX,
 } from "../../common/constants";
 import { ObsidianTagsInfo, ObsidianVaultInfo } from "../../common/types";
+import { buildBaseMetadata } from "./utils";
 
 export function processFile(
   input: ObsidianVaultInfo,
@@ -62,12 +63,40 @@ function processInternalLinks(
   fileName: string
 ) {
   const matches = text.matchAll(OBSIDIAN_INTERNAL_LINK_REGEX);
+
   for (const match of matches) {
     const internalLink = match[0].slice(2, -2);
+    initInternalLinkIfNecessary(internalLink, metadata);
+    handleLinkedDocument(fileName, internalLink, metadata);
+  }
+}
 
-    metadata.documents[fileName].internalLinks = [
-      ...metadata.documents[fileName].internalLinks,
-      internalLink,
-    ];
+function initInternalLinkIfNecessary(
+  link: string,
+  metadata: ObsidianVaultInfo
+) {
+  if (!metadata.documents[link]) {
+    metadata.documents[link] = buildBaseMetadata();
+  }
+}
+
+function handleLinkedDocument(
+  sourceFile: string,
+  targetFile: string,
+  metadata: ObsidianVaultInfo
+) {
+  addLinkedDocumentIfNotPresent(sourceFile, targetFile, metadata);
+  addLinkedDocumentIfNotPresent(targetFile, sourceFile, metadata);
+}
+
+function addLinkedDocumentIfNotPresent(
+  sourceFile: string,
+  targetFile: string,
+  metadata: ObsidianVaultInfo
+) {
+  const relatedDocuments = metadata.documents[sourceFile].relatedDocuments;
+
+  if (!relatedDocuments.has(targetFile)) {
+    relatedDocuments.add(targetFile);
   }
 }

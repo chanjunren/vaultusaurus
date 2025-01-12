@@ -7,9 +7,9 @@ export type ObsidianTagInfo = {
 export type ObsidianTagsInfo = { [tag: string]: ObsidianTagInfo };
 
 export type DocumentInfo = {
-  relativeFilePath: string;
+  relativeFilePath?: string;
   tags: string[];
-  internalLinks: string[];
+  relatedDocuments: Set<string>;
 };
 
 export type ObsidianVaultInfo = {

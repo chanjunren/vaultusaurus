@@ -15,7 +15,8 @@
     "build": "npm run cleanup; tsc",
     "postbuild": "mkdir ./lib/plugin/css; cp ./src/plugin/css/* ./lib/plugin/css",
     "cleanup": "rm -rf lib tsconfig.tsbuildinfo vaultusaurus-*.tgz",
-    "pack": "npm run build && npm pack"
+    "pack": "npm run build && npm pack",
+    "vault_run": "npm run build && npm pack && cd ~/.nexus/chanjunren.github.io/www && npm start && cd ~/.nexus/vaultusaurus"
   },
   "author": "chanjunren",
   "license": "MIT",

@@ -204,17 +204,17 @@ function handleInternalLinks(
   vault: ObsidianVaultInfo,
   adjacencyMap: AdjacencyMap
 ) {
-  vault.documents[currentNode.label].internalLinks.forEach((internalLink) => {
-    const internalLinkId = `${OBSIDIAN_FILE_ID_PREFIX}__${vault.documents[internalLink].relativeFilePath}`;
+  vault.documents[currentNode.label].relatedDocuments.forEach((document) => {
+    const relatedDocumentId = `${OBSIDIAN_FILE_ID_PREFIX}__${vault.documents[document].relativeFilePath}`;
 
     queue.push({
-      id: internalLinkId,
-      label: internalLink,
+      id: relatedDocumentId,
+      label: document,
       type: "DOCUMENT",
-      path: vault.documents[internalLink].relativeFilePath,
+      path: vault.documents[document].relativeFilePath,
     });
 
-    handleLink(currentNode.id, internalLinkId, adjacencyMap, links);
+    handleLink(currentNode.id, relatedDocumentId, adjacencyMap, links);
   });
 }
 
