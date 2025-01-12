@@ -1,10 +1,10 @@
-import { AdjcacencyMap, GraphNodeLinkInfo } from "@vaultusaurus/common/types";
+import { AdjacencyMap, GraphNodeLinkInfo } from "@vaultusaurus/common/types";
 import { ObsidianNoteNode } from "@vaultusaurus/plugin/types";
 import { useEffect, useState } from "react";
 
 export default function useHover(links: GraphNodeLinkInfo[]) {
   const [hoveredNode, setHoveredNode] = useState<ObsidianNoteNode>(null);
-  const [adjacencyMap, setAdjacencyMap] = useState<AdjcacencyMap>({});
+  const [adjacencyMap, setAdjacencyMap] = useState<AdjacencyMap>({});
 
   useEffect(() => {
     if (!links || links.length === 0) {

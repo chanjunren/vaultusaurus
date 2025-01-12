@@ -5,7 +5,7 @@ import {
 } from "../../common/constants";
 import { VaultusaurusPluginOptions } from "../../common/options";
 import {
-  AdjcacencyMap,
+  AdjacencyMap,
   GraphInfo,
   GraphNodeInfo,
   GraphNodeLinkInfo,
@@ -50,7 +50,7 @@ function buildGraphInfo(
 ): GraphInfo {
   const visitedDocuments: Set<string> = new Set([]);
   const visitedTags: Set<string> = new Set([]);
-  const adjacencyMap: AdjcacencyMap = {};
+  const adjacencyMap: AdjacencyMap = {};
   const tagsToIgnore = new Set(options.ignoredGraphTags || []);
 
   const queue: GraphNodeInfo[] = [
@@ -133,7 +133,7 @@ function markAsVisited(
 function edgeExists(
   source: string,
   target: string,
-  adjacencyMap: AdjcacencyMap
+  adjacencyMap: AdjacencyMap
 ) {
   return (
     (adjacencyMap[source] && adjacencyMap[source].has(target)) ||
@@ -144,7 +144,7 @@ function edgeExists(
 function handleLink(
   source: string,
   target: string,
-  adjacencyMap: AdjcacencyMap,
+  adjacencyMap: AdjacencyMap,
   links: GraphNodeLinkInfo[]
 ) {
   if (edgeExists(source, target, adjacencyMap)) {
@@ -163,7 +163,7 @@ function handleLink(
 function checkAdjacencyMap(
   source: string,
   target: string,
-  adjacencyMap: AdjcacencyMap
+  adjacencyMap: AdjacencyMap
 ) {
   if (!adjacencyMap[source]) {
     adjacencyMap[source] = new Set();
@@ -178,7 +178,7 @@ function handleDocumentTags(
   queue: GraphNodeInfo[],
   links: GraphNodeLinkInfo[],
   vault: ObsidianVaultInfo,
-  adjacencyMap: AdjcacencyMap,
+  adjacencyMap: AdjacencyMap,
   tagsToIgnore: Set<string>
 ) {
   vault.documents[currentNode.label].tags.forEach((tag) => {
@@ -202,7 +202,7 @@ function handleInternalLinks(
   queue: GraphNodeInfo[],
   links: GraphNodeLinkInfo[],
   vault: ObsidianVaultInfo,
-  adjacencyMap: AdjcacencyMap
+  adjacencyMap: AdjacencyMap
 ) {
   vault.documents[currentNode.label].internalLinks.forEach((internalLink) => {
     const internalLinkId = `${OBSIDIAN_FILE_ID_PREFIX}__${vault.documents[internalLink].relativeFilePath}`;
@@ -224,7 +224,7 @@ function handleTaggedDocuments(
   links: GraphNodeLinkInfo[],
   vault: ObsidianVaultInfo,
   tags: ObsidianTagsInfo,
-  adjacencyMap: AdjcacencyMap,
+  adjacencyMap: AdjacencyMap,
   tagsToIgnore: Set<string>
 ) {
   if (tagsToIgnore.has(currentNode.label)) {

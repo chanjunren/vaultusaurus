@@ -39,7 +39,7 @@ export type GraphInfo = {
 
 export type GraphInfoMap = { [filePath: string]: GraphInfo };
 
-export type AdjcacencyMap = {
+export type AdjacencyMap = {
   [key: string]: Set<string>;
 };
 
