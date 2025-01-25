@@ -12,11 +12,16 @@ import {
 } from "@vaultusaurus/plugin/utils";
 import { ReactElement, useRef } from "react";
 
-export default function LocalGraph(): ReactElement {
+interface ILocalGraph {
+  customGraph?: GraphInfo;
+}
+
+export default function LocalGraph({ customGraph }): ReactElement<ILocalGraph> {
   const globalData = usePluginData(
     "docusaurus-plugin-vaultusaurus"
   ) as VaultusaurusGlobalData;
-  const graphInfo: GraphInfo = globalData.graphInfo[window.location.pathname];
+  const graphInfo: GraphInfo =
+    globalData.graphInfo[window.location.pathname] || customGraph;
 
   if (!graphInfo) {
     return null;
