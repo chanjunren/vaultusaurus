@@ -1,7 +1,7 @@
 :root {
     --vaultusaurus-modal-width: 80%;
     --vaultusaurus-modal-height: 60%;
-    --vaultusaurus-icon-size: 1.7rem;
+    --vaultusaurus-icon-size: 1.6rem;
 }
 
 .container {
@@ -50,11 +50,12 @@
     transition-property: all;
     transition-duration: 0.3s;
     cursor: pointer;
-    color: var(--default-color);
+    color: var(--vaultusaurus-default-color);
 }
 
 .actionIcon:hover {
     opacity: 1;
+    scale: 110%;
 }
 
 .graphComponent {

@@ -29,7 +29,8 @@ export default function GraphContent({
   modal = false,
 }): ReactElement<IGraphContent> {
   const { graphStyle, graphManager } = useContext(GraphContext);
-  const { setExpanded, nodes, links } = graphManager;
+  const { setExpanded, nodes, links, containerWidth, containerHeight } =
+    graphManager;
 
   const inlineStyles = {
     "--vaultusaurus-graph-bg": graphStyle.graphBg,
@@ -44,6 +45,7 @@ export default function GraphContent({
     <div
       className={modal ? styles.modalContainer : styles.container}
       style={inlineStyles}
+      onClick={(e) => e.stopPropagation()}
     >
       {!modal && expandable && (
         <ExpandIcon
@@ -57,7 +59,11 @@ export default function GraphContent({
           onClick={() => setExpanded(false)}
         />
       )}
-      <svg viewBox={`0 0 300 300`} ref={container}>
+      <svg
+        viewBox={`0 0 ${containerWidth} ${containerHeight}`}
+        preserveAspectRatio="xMidYMid meet"
+        ref={container}
+      >
         <g transform={transform}>
           {links.map((link, idx) => {
             return <GraphLink key={`obsidian-link-${idx}`} link={link} />;

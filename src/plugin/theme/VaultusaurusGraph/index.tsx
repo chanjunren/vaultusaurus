@@ -49,7 +49,10 @@ export default function VaultusaurusGraph({
     >
       {expanded &&
         createPortal(
-          <div className={expanded ? styles.modalOverlay : styles.hidden}>
+          <div
+            className={expanded ? styles.modalOverlay : styles.hidden}
+            onClick={() => graphManager.setExpanded(false)}
+          >
             <GraphContent modal expandable={false} />
           </div>,
           document.body

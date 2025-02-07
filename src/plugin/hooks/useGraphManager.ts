@@ -9,11 +9,6 @@ import {
   Simulation,
 } from "d3-force";
 import { useEffect, useMemo, useRef, useState } from "react";
-
-const WIDTH = 240;
-const HEIGHT = 240;
-const LINK_DISTANCE = 50;
-
 export default function useGraphManager(rawData: GraphInfo) {
   const graphData = useMemo(() => structuredClone(rawData), [rawData]);
 
@@ -30,6 +25,10 @@ export default function useGraphManager(rawData: GraphInfo) {
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
+  const containerWidth = expanded ? 800 : 320;
+  const containerHeight = expanded ? 450 : 320;
+  const LINK_DISTANCE = expanded ? 55 : 40;
+
   useEffect(() => {
     if (!graphData?.nodes) {
       return;
@@ -40,15 +39,17 @@ export default function useGraphManager(rawData: GraphInfo) {
       ObsidianNoteLink
     >(Object.values(nodes))
       .alphaDecay(0.01)
+      .velocityDecay(0.1)
       .force(
         "link",
         forceLink<ObsidianNoteNode, ObsidianNoteLink>(links)
           .id((d) => d.id)
           .distance(LINK_DISTANCE)
+          .strength(0.01) // Softer link strength to reduce rigidity
       )
-      .force("center", forceCenter(WIDTH / 2, HEIGHT / 2))
-      .force("charge", forceManyBody())
-      .force("collision", forceCollide())
+      .force("center", forceCenter(containerWidth / 2, containerHeight / 2)) // Center the graph
+      .force("charge", forceManyBody().strength(-5)) // Softer repulsion
+      .force("collision", forceCollide().radius(10).strength(0.01)) // Smoother collision
       .on("tick", () => {
         const newNodes = toNodeMap(currentSimulation.nodes());
         setNodes(newNodes);
@@ -61,9 +62,31 @@ export default function useGraphManager(rawData: GraphInfo) {
       console.log("STOPPING");
       currentSimulation.stop();
     };
-  }, [graphData]);
+  }, [graphData, expanded]);
 
-  return { nodes, links, simulation, expanded, setExpanded };
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setExpanded(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  return {
+    nodes,
+    links,
+    simulation,
+    expanded,
+    setExpanded,
+    containerWidth,
+    containerHeight,
+  };
 }
 
 function toNodeMap(nodes: ObsidianNoteNode[]) {
