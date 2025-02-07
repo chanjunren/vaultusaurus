@@ -18,6 +18,12 @@ export default async function docusaurusPluginVaultusaurus(
       );
     },
 
+    getPathsToWatch() {
+      return [
+        path.join(context.siteDir, "../../vaultusaurus/**/*.{ts,tsx,css}"),
+      ];
+    },
+
     getThemePath() {
       return path.join(__dirname, "theme");
     },

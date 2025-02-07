@@ -2,6 +2,22 @@
     background: var(--graph-bg);
     aspect-ratio: 1 / 1;
     border-radius: 8px;
+    position: relative;
+}
+
+.expandIcon {
+    position: absolute;
+    top: 17px;
+    right: 1.5rem;
+    width: 1.5rem;
+    opacity: 0.5;
+    transition-property: all;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.expandIcon:hover {
+    opacity: 1;
 }
 
 .graphComponent {
