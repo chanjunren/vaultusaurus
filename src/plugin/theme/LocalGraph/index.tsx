@@ -2,22 +2,31 @@ import { usePluginData } from "@docusaurus/useGlobalData";
 import { GraphInfo, VaultusaurusGlobalData } from "@vaultusaurus/common/types";
 import { GraphContext } from "@vaultusaurus/plugin/context";
 import styles from "@vaultusaurus/plugin/css/index.module.css";
-import { useHover, useLocalGraph, useZoom } from "@vaultusaurus/plugin/hooks";
+import { useHover, useLocalGraph } from "@vaultusaurus/plugin/hooks";
+import CollapseIcon from "@vaultusaurus/plugin/resources/CollapseIcon.svg";
 import ExpandIcon from "@vaultusaurus/plugin/resources/ExpandIcon.svg";
-import GraphLink from "@vaultusaurus/plugin/theme/GraphLink";
-import GraphNode from "@vaultusaurus/plugin/theme/GraphNode";
 import {
   FALLBACK_ACTIVE_COLOR,
   FALLBACK_BACKGROUND_COLOR,
   FALLBACK_DEFAULT_COLOR,
 } from "@vaultusaurus/plugin/utils";
-import { ReactElement, useRef } from "react";
+import { ReactElement } from "react";
+import { createPortal } from "react-dom";
+import GraphContent from "./GraphContent";
 
 interface ILocalGraph {
   customGraph?: GraphInfo;
+  expandable?: boolean;
+  modal?: boolean;
+  modalCloseCallback: () => void;
 }
 
-export default function LocalGraph({ customGraph }): ReactElement<ILocalGraph> {
+export default function LocalGraph({
+  customGraph,
+  expandable = true,
+  modal = false,
+  modalCloseCallback,
+}): ReactElement<ILocalGraph> {
   const globalData = usePluginData(
     "docusaurus-plugin-vaultusaurus"
   ) as VaultusaurusGlobalData;
@@ -27,13 +36,13 @@ export default function LocalGraph({ customGraph }): ReactElement<ILocalGraph> {
   if (!graphInfo) {
     return null;
   }
-
   const inputGraphStyle = globalData.graphStyle;
 
-  const { nodes, links, simulation } = useLocalGraph(graphInfo);
-  const container = useRef(null);
-  const { transform } = useZoom(container);
+  const { simulation, expanded, setExpanded } = useLocalGraph(graphInfo);
   const rawLinks = graphInfo?.links || [];
+
+  const defaultColor = inputGraphStyle.defaultColor || FALLBACK_DEFAULT_COLOR;
+  const activeColor = inputGraphStyle.activeColor || FALLBACK_ACTIVE_COLOR;
 
   return (
     <GraphContext.Provider
@@ -41,37 +50,45 @@ export default function LocalGraph({ customGraph }): ReactElement<ILocalGraph> {
         ...useHover(rawLinks),
         simulation,
         graphStyle: {
-          activeColor: inputGraphStyle.activeColor || FALLBACK_ACTIVE_COLOR,
-          defaultColor: inputGraphStyle.defaultColor || FALLBACK_DEFAULT_COLOR,
+          activeColor: activeColor,
+          defaultColor: defaultColor,
         },
       }}
     >
+      {expanded &&
+        createPortal(
+          <div className={styles.modalOverlay}>
+            <LocalGraph
+              modal
+              expandable={false}
+              modalCloseCallback={() => setExpanded(false)}
+            />
+          </div>,
+          document.body
+        )}
       <div
-        className={styles.container}
+        className={modal ? styles.modalContainer : styles.container}
         style={
           {
             "--graph-bg":
               globalData.graphStyle.graphBg || FALLBACK_BACKGROUND_COLOR,
+            "--default-color": defaultColor,
           } as React.CSSProperties
         }
       >
-        <ExpandIcon
-          className={styles.expandIcon}
-          style={{
-            color: FALLBACK_DEFAULT_COLOR,
-          }}
-        />
-
-        <svg viewBox={`0 0 300 300`} ref={container}>
-          <g transform={transform}>
-            {links.map((link, idx) => {
-              return <GraphLink key={`obsidian-link-${idx}`} link={link} />;
-            })}
-            {Object.values(nodes).map((node) => (
-              <GraphNode key={node.id} node={node} />
-            ))}
-          </g>
-        </svg>
+        {!expanded && expandable && (
+          <ExpandIcon
+            className={styles.actionIcon}
+            onClick={() => setExpanded(true)}
+          />
+        )}
+        {modal && (
+          <CollapseIcon
+            className={styles.actionIcon}
+            onClick={() => modalCloseCallback()}
+          />
+        )}
+        <GraphContent info={graphInfo} />
       </div>
     </GraphContext.Provider>
   );

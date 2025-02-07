@@ -28,6 +28,8 @@ export default function useLocalGraph(rawData: GraphInfo) {
   const simulation =
     useRef<Simulation<ObsidianNoteNode, ObsidianNoteLink>>(null);
 
+  const [expanded, setExpanded] = useState<boolean>(false);
+
   useEffect(() => {
     if (!graphData?.nodes) {
       return;
@@ -60,7 +62,7 @@ export default function useLocalGraph(rawData: GraphInfo) {
     };
   }, [graphData]);
 
-  return { nodes, links, simulation };
+  return { nodes, links, simulation, expanded, setExpanded };
 }
 
 function toNodeMap(nodes: ObsidianNoteNode[]) {

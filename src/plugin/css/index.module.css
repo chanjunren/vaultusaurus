@@ -1,3 +1,9 @@
+:root {
+    --vaultusaurus-modal-width: 80%;
+    --vaultusaurus-modal-height: 60%;
+    --vaultusaurus-icon-size: 1.7rem;
+}
+
 .container {
     background: var(--graph-bg);
     aspect-ratio: 1 / 1;
@@ -5,18 +11,49 @@
     position: relative;
 }
 
-.expandIcon {
+.hidden {
+    display: none;
+}
+
+.modalContainer {
+    background: var(--graph-bg);
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    z-index: 9999;
+    width: var(--vaultusaurus-modal-width);
+    height: var(--vaultusaurus-modal-height);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.modalOverlay {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 9998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.actionIcon {
     position: absolute;
     top: 17px;
-    right: 1.5rem;
-    width: 1.5rem;
+    right: 17px;
+    width: var(--vaultusaurus-icon-size);
+    height: var(--vaultusaurus-icon-size);
     opacity: 0.5;
     transition-property: all;
     transition-duration: 0.3s;
     cursor: pointer;
+    color: var(--default-color);
 }
 
-.expandIcon:hover {
+.actionIcon:hover {
     opacity: 1;
 }
 
