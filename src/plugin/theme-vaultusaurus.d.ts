@@ -10,5 +10,5 @@ declare module "vaultusaurus" {
 }
 
 declare module "@theme/LocalGraph" {
-  export default function LocalGraph(props: any): ReactElement;
+  export default function VaultusaurusGraph(props: any): ReactElement;
 }

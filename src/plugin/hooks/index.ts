@@ -1,6 +1,6 @@
+import useGraphManager from "./useGraphManager";
 import useGraphNode from "./useGraphNode";
-import useHover from "./useHover";
-import useLocalGraph from "./useLocalGraph";
+import useHoverManager from "./useHoverManager";
 import useZoom from "./useZoom";
 
-export { useGraphNode, useHover, useLocalGraph, useZoom };
+export { useGraphManager, useGraphNode, useHoverManager, useZoom };

@@ -15,7 +15,8 @@ export default function GraphLink({ link }: GraphLinkProps) {
     return null;
   }
 
-  const { hoveredNode, graphStyle } = useContext(GraphContext);
+  const { hoverManager, graphStyle } = useContext(GraphContext);
+  const { hoveredNode } = hoverManager;
   const someNodeIsHovered = hoveredNode?.id;
   const focused =
     someNodeIsHovered &&

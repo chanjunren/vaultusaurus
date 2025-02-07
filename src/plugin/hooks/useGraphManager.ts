@@ -14,7 +14,7 @@ const WIDTH = 240;
 const HEIGHT = 240;
 const LINK_DISTANCE = 50;
 
-export default function useLocalGraph(rawData: GraphInfo) {
+export default function useGraphManager(rawData: GraphInfo) {
   const graphData = useMemo(() => structuredClone(rawData), [rawData]);
 
   const [nodes, setNodes] = useState<{ [key: string]: ObsidianNoteNode }>(
@@ -58,6 +58,7 @@ export default function useLocalGraph(rawData: GraphInfo) {
     simulation.current = currentSimulation;
 
     return () => {
+      console.log("STOPPING");
       currentSimulation.stop();
     };
   }, [graphData]);

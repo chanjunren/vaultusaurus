@@ -1,16 +1,16 @@
-import {
-  LocalGraphContext,
-  ObsidianNoteNode,
-} from "@vaultusaurus/plugin/types";
+import { IGraphContext, ObsidianNoteNode } from "@vaultusaurus/plugin/types";
 import { drag } from "d3-drag";
 import { select } from "d3-selection";
 import { useCallback, useEffect, useRef } from "react";
 
 export default function useGraphNode(
-  context: LocalGraphContext,
+  context: IGraphContext,
   node: ObsidianNoteNode
 ) {
-  const { hoveredNode, adjacencyMap, simulation } = context;
+  const { hoverManager, graphManager } = context;
+  const { hoveredNode, adjacencyMap } = hoverManager;
+  const { simulation } = graphManager;
+
   const nodeRef = useRef(null);
 
   const imBeingHovered = hoveredNode?.id === node.id;

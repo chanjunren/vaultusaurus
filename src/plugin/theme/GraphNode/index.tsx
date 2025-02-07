@@ -10,7 +10,8 @@ type GraphNodeProps = {
 
 export default function GraphNode({ node }: GraphNodeProps) {
   const context = useContext(GraphContext);
-  const { setHoveredNode, graphStyle } = context;
+  const { hoverManager, graphStyle } = context;
+  const { setHoveredNode } = hoverManager;
   const { imBeingHovered, otherNodeIsHovered, focused, nodeRef } = useGraphNode(
     context,
     node
