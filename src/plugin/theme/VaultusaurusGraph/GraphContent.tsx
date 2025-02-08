@@ -1,32 +1,25 @@
 import { ReactElement, useContext, useRef } from "react";
 
-import { GraphStyle } from "@vaultusaurus/common/options";
-import {
-  GraphInfo,
-  GraphNodeInfo,
-  GraphNodeLinkInfo,
-} from "@vaultusaurus/common/types";
 import { GraphContext } from "@vaultusaurus/plugin/context";
 import styles from "@vaultusaurus/plugin/css/index.module.css";
 import { useZoom } from "@vaultusaurus/plugin/hooks";
 import CollapseIcon from "@vaultusaurus/plugin/resources/CollapseIcon.svg";
 import ExpandIcon from "@vaultusaurus/plugin/resources/ExpandIcon.svg";
+import GlobalGraphIcon from "@vaultusaurus/plugin/resources/GlobalGraphIcon.svg";
 import GraphLink from "@vaultusaurus/plugin/theme/GraphLink";
 import GraphNode from "@vaultusaurus/plugin/theme/GraphNode";
+import classNames from "classnames";
 
 interface IGraphContent {
-  info: GraphInfo;
-  modal: boolean;
-  style: GraphStyle;
-  nodes: GraphNodeInfo[];
-  links: GraphNodeLinkInfo[];
-  expanded: boolean;
-  setExpanded: () => void;
+  expandable?: boolean;
+  modal?: boolean;
+  expanded?: boolean;
 }
 
 export default function GraphContent({
   expandable = true,
   modal = false,
+  enableGlobal = true,
 }): ReactElement<IGraphContent> {
   const { graphStyle, graphManager } = useContext(GraphContext);
   const { setExpanded, nodes, links, containerWidth, containerHeight } =
@@ -49,18 +42,26 @@ export default function GraphContent({
     >
       {!modal && expandable && (
         <button
-          className={styles.actionOverlay}
+          className={classNames(styles.iconOverlay, styles.topButton)}
           onClick={() => setExpanded(true)}
         >
-          <ExpandIcon className={styles.actionIcon} />
+          <ExpandIcon />
+        </button>
+      )}
+      {!modal && enableGlobal && (
+        <button
+          className={classNames(styles.iconOverlay, styles.nextButton)}
+          onClick={() => setExpanded(true)}
+        >
+          <GlobalGraphIcon />
         </button>
       )}
       {modal && (
         <button
-          className={styles.actionOverlay}
+          className={classNames(styles.iconOverlay, styles.topButton)}
           onClick={() => setExpanded(false)}
         >
-          <CollapseIcon className={styles.actionIcon} />
+          <CollapseIcon />
         </button>
       )}
       <svg

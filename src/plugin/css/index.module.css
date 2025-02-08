@@ -41,19 +41,8 @@
     backdrop-filter: var(--vaultusaurus-blur);
 }
 
-.actionIcon {
-    opacity: 0.5;
-    color: var(--vaultusaurus-default-color);
-    width: var(--vaultusaurus-icon-size);
-    height: var(--vaultusaurus-icon-size);
-    transition-duration: 0.3s;
-    transition-property: all;
-}
-
-.actionOverlay {
+.iconOverlay {
     position: absolute;
-    top: 15px;
-    right: 17px;
     transition-property: all;
     transition-duration: 0.3s;
     border: none;
@@ -66,12 +55,35 @@
     cursor: pointer;
     transition-duration: 0.3s;
     transition-property: all;
+
 }
 
-.actionOverlay:hover {
+.topButton {
+    top: 15px;
+    right: 17px;
+}
+
+.nextButton {
+    top: 50px;
+    right: 17px;
+}
+
+
+
+.iconOverlay > svg {
+    opacity: 0.5;
+    color: var(--vaultusaurus-default-color);
+    width: var(--vaultusaurus-icon-size);
+    height: var(--vaultusaurus-icon-size);
+    transition-duration: 0.3s;
+    transition-property: all;
+}
+
+.iconOverlay:hover {
     background-color: rgba(128, 128, 128, 0.2);
     backdrop-filter: var(--vaultusaurus-blur);
-    .actionIcon {
+
+    svg {
         opacity: 1;
     }
 }
