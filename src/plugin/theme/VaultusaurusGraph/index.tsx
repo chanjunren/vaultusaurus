@@ -12,31 +12,38 @@ import { ReactElement } from "react";
 import { createPortal } from "react-dom";
 import GraphContent from "./GraphContent";
 
-interface ILocalGraph {
+interface IVaultusaurusGraph {
   customGraph?: GraphInfo;
   expandable?: boolean;
-  enableGlobal?: boolean;
+  global?: boolean;
+  minimizeGraphCallback?: () => void;
 }
 
 export default function VaultusaurusGraph({
-  customGraph,
-  expandable,
-  enableGlobal,
-}): ReactElement<ILocalGraph> {
+  customGraph = null,
+  expandable = true,
+  global,
+  minimizeGraphCallback,
+}): ReactElement<IVaultusaurusGraph> {
   const globalData = usePluginData(
     "docusaurus-plugin-vaultusaurus"
   ) as VaultusaurusGlobalData;
-  const graphInfo: GraphInfo =
-    globalData.graphInfo[window.location.pathname] || customGraph;
+  const graphInfo: GraphInfo = global
+    ? globalData.globalGraphInfo
+    : globalData.graphInfo[window.location.pathname] || customGraph;
 
   if (!graphInfo) {
     return null;
   }
   const inputGraphStyle = globalData.graphStyle;
 
-  const graphManager = useGraphManager(graphInfo);
+  const graphManager = useGraphManager(
+    graphInfo,
+    global,
+    minimizeGraphCallback
+  );
   const rawLinks = graphInfo?.links || [];
-  const expanded = graphManager.expanded;
+  const { expanded, globalModal, setGlobalModal } = graphManager;
 
   return (
     <GraphContext.Provider
@@ -50,6 +57,18 @@ export default function VaultusaurusGraph({
         },
       }}
     >
+      {global && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => minimizeGraphCallback()}
+        >
+          <GraphContent
+            modal
+            expandable={false}
+            callback={() => minimizeGraphCallback()}
+          />
+        </div>
+      )}
       {expanded &&
         createPortal(
           <div
@@ -60,7 +79,16 @@ export default function VaultusaurusGraph({
           </div>,
           document.body
         )}
-      <GraphContent enableGlobal={enableGlobal} expandable={expandable} />
+      {globalModal &&
+        createPortal(
+          <VaultusaurusGraph
+            global
+            minimizeGraphCallback={() => setGlobalModal(false)}
+          />,
+          document.body
+        )}
+
+      {!global && <GraphContent expandable={expandable} />}
     </GraphContext.Provider>
   );
 }

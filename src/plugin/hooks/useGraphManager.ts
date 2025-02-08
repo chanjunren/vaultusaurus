@@ -9,7 +9,11 @@ import {
   Simulation,
 } from "d3-force";
 import { useEffect, useMemo, useRef, useState } from "react";
-export default function useGraphManager(rawData: GraphInfo) {
+export default function useGraphManager(
+  rawData: GraphInfo,
+  global: boolean,
+  minimizeCallback?: () => void
+) {
   const graphData = useMemo(() => structuredClone(rawData), [rawData]);
 
   const [nodes, setNodes] = useState<{ [key: string]: ObsidianNoteNode }>(
@@ -24,9 +28,10 @@ export default function useGraphManager(rawData: GraphInfo) {
     useRef<Simulation<ObsidianNoteNode, ObsidianNoteLink>>(null);
 
   const [expanded, setExpanded] = useState<boolean>(false);
+  const [globalModal, setGlobalModal] = useState<boolean>(false);
 
-  const containerWidth = expanded ? 1200 : 280;
-  const containerHeight = expanded ? (containerWidth * 9) / 16 : 280;
+  const containerWidth = global ? 1800 : expanded ? 1200 : 280;
+  const containerHeight = expanded || global ? (containerWidth * 9) / 16 : 280;
   const LINK_DISTANCE = expanded ? 20 : 10;
 
   useEffect(() => {
@@ -67,6 +72,9 @@ export default function useGraphManager(rawData: GraphInfo) {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setExpanded(false);
+        if (minimizeCallback) {
+          minimizeCallback();
+        }
       }
     };
 
@@ -85,6 +93,8 @@ export default function useGraphManager(rawData: GraphInfo) {
     setExpanded,
     containerWidth,
     containerHeight,
+    globalModal,
+    setGlobalModal,
   };
 }
 

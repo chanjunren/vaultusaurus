@@ -14,6 +14,8 @@ export const GraphContext = createContext<IGraphContext>({
     simulation: null,
     expanded: false,
     setExpanded: () => {},
+    globalModal: false,
+    setGlobalModal: () => {},
     containerWidth: 0,
     containerHeight: 0,
   },

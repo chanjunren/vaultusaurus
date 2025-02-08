@@ -14,16 +14,23 @@ interface IGraphContent {
   expandable?: boolean;
   modal?: boolean;
   expanded?: boolean;
+  callback?: () => void;
 }
 
 export default function GraphContent({
   expandable = true,
   modal = false,
-  enableGlobal = true,
+  callback = () => {},
 }): ReactElement<IGraphContent> {
   const { graphStyle, graphManager } = useContext(GraphContext);
-  const { setExpanded, nodes, links, containerWidth, containerHeight } =
-    graphManager;
+  const {
+    setExpanded,
+    nodes,
+    links,
+    containerWidth,
+    containerHeight,
+    setGlobalModal,
+  } = graphManager;
 
   const inlineStyles = {
     "--vaultusaurus-graph-bg": graphStyle.graphBg,
@@ -48,10 +55,10 @@ export default function GraphContent({
           <ExpandIcon />
         </button>
       )}
-      {!modal && enableGlobal && (
+      {!modal && (
         <button
           className={classNames(styles.iconOverlay, styles.nextButton)}
-          onClick={() => setExpanded(true)}
+          onClick={() => setGlobalModal(true)}
         >
           <GlobalGraphIcon />
         </button>
@@ -59,7 +66,10 @@ export default function GraphContent({
       {modal && (
         <button
           className={classNames(styles.iconOverlay, styles.topButton)}
-          onClick={() => setExpanded(false)}
+          onClick={() => {
+            setExpanded(false);
+            callback();
+          }}
         >
           <CollapseIcon />
         </button>
