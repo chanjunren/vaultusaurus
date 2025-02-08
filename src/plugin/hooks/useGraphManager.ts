@@ -25,9 +25,9 @@ export default function useGraphManager(rawData: GraphInfo) {
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
-  const containerWidth = expanded ? 800 : 320;
-  const containerHeight = expanded ? 450 : 320;
-  const LINK_DISTANCE = expanded ? 55 : 40;
+  const containerWidth = expanded ? 1200 : 280;
+  const containerHeight = expanded ? (containerWidth * 9) / 16 : 280;
+  const LINK_DISTANCE = expanded ? 20 : 10;
 
   useEffect(() => {
     if (!graphData?.nodes) {
@@ -38,8 +38,8 @@ export default function useGraphManager(rawData: GraphInfo) {
       ObsidianNoteNode,
       ObsidianNoteLink
     >(Object.values(nodes))
-      .alphaDecay(0.01)
-      .velocityDecay(0.1)
+      .alphaDecay(0.03)
+      .velocityDecay(0.07)
       .force(
         "link",
         forceLink<ObsidianNoteNode, ObsidianNoteLink>(links)
@@ -59,7 +59,6 @@ export default function useGraphManager(rawData: GraphInfo) {
     simulation.current = currentSimulation;
 
     return () => {
-      console.log("STOPPING");
       currentSimulation.stop();
     };
   }, [graphData, expanded]);
