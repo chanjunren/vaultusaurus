@@ -68,24 +68,23 @@
     right: 17px;
 }
 
+.graphComponent {
+    transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
 .iconOverlay > svg {
     opacity: 0.5;
     color: var(--vaultusaurus-default-color);
     width: var(--vaultusaurus-icon-size);
     height: var(--vaultusaurus-icon-size);
-    transition-duration: 0.3s;
-    transition-property: all;
+    transition: all 0.3s;
 }
 
 .iconOverlay:hover {
     background-color: rgba(128, 128, 128, 0.2);
     backdrop-filter: var(--vaultusaurus-blur);
-
-    svg {
-        opacity: 1;
-    }
 }
 
-.graphComponent {
-    transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+.iconOverlay:hover > svg {
+    opacity: 1;
 }
