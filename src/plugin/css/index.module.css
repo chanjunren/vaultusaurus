@@ -1,7 +1,8 @@
 :root {
     --vaultusaurus-modal-width: 80%;
     --vaultusaurus-modal-height: 60%;
-    --vaultusaurus-icon-size: 1.6rem;
+    --vaultusaurus-icon-size: 16px;
+    --vaultusaurus-blur: blur(7px);
 }
 
 .container {
@@ -37,25 +38,42 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(5px);
+    backdrop-filter: var(--vaultusaurus-blur);
 }
 
 .actionIcon {
-    position: absolute;
-    top: 17px;
-    right: 17px;
+    opacity: 0.5;
+    color: var(--vaultusaurus-default-color);
     width: var(--vaultusaurus-icon-size);
     height: var(--vaultusaurus-icon-size);
-    opacity: 0.5;
-    transition-property: all;
     transition-duration: 0.3s;
-    cursor: pointer;
-    color: var(--vaultusaurus-default-color);
+    transition-property: all;
 }
 
-.actionIcon:hover {
-    opacity: 1;
-    scale: 110%;
+.actionOverlay {
+    position: absolute;
+    top: 15px;
+    right: 17px;
+    transition-property: all;
+    transition-duration: 0.3s;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    transition-property: all;
+}
+
+.actionOverlay:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+    backdrop-filter: var(--vaultusaurus-blur);
+    .actionIcon {
+        opacity: 1;
+    }
 }
 
 .graphComponent {

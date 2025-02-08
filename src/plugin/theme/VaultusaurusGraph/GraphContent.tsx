@@ -45,19 +45,23 @@ export default function GraphContent({
     <div
       className={modal ? styles.modalContainer : styles.container}
       style={inlineStyles}
-      onClick={(e) => e.stopPropagation()}
+      onClick={(e) => modal && e.stopPropagation()}
     >
       {!modal && expandable && (
-        <ExpandIcon
-          className={styles.actionIcon}
+        <button
+          className={styles.actionOverlay}
           onClick={() => setExpanded(true)}
-        />
+        >
+          <ExpandIcon className={styles.actionIcon} />
+        </button>
       )}
       {modal && (
-        <CollapseIcon
-          className={styles.actionIcon}
+        <button
+          className={styles.actionOverlay}
           onClick={() => setExpanded(false)}
-        />
+        >
+          <CollapseIcon className={styles.actionIcon} />
+        </button>
       )}
       <svg
         viewBox={`0 0 ${containerWidth} ${containerHeight}`}

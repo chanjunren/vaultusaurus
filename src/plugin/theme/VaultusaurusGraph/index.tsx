@@ -19,7 +19,7 @@ interface ILocalGraph {
 
 export default function VaultusaurusGraph({
   customGraph,
-  expanadable,
+  expandable,
 }): ReactElement<ILocalGraph> {
   const globalData = usePluginData(
     "docusaurus-plugin-vaultusaurus"
@@ -58,7 +58,7 @@ export default function VaultusaurusGraph({
           </div>,
           document.body
         )}
-      <GraphContent expandable={expanadable} />
+      <GraphContent expandable={expandable} />
     </GraphContext.Provider>
   );
 }
