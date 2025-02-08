@@ -14,6 +14,7 @@ interface IGraphContent {
   expandable?: boolean;
   modal?: boolean;
   expanded?: boolean;
+  enableGlobalGraph?: boolean;
   callback?: () => void;
 }
 
@@ -21,6 +22,7 @@ export default function GraphContent({
   expandable = true,
   modal = false,
   callback = () => {},
+  enableGlobalGraph = true,
 }): ReactElement<IGraphContent> {
   const { graphStyle, graphManager } = useContext(GraphContext);
   const {
@@ -55,7 +57,7 @@ export default function GraphContent({
           <ExpandIcon />
         </button>
       )}
-      {!modal && (
+      {!modal && enableGlobalGraph && (
         <button
           className={classNames(styles.iconOverlay, styles.nextButton)}
           onClick={() => setGlobalModal(true)}

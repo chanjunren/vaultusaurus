@@ -16,12 +16,14 @@ interface IVaultusaurusGraph {
   customGraph?: GraphInfo;
   expandable?: boolean;
   global?: boolean;
+  enableGlobalGraph?: boolean;
   minimizeGraphCallback?: () => void;
 }
 
 export default function VaultusaurusGraph({
   customGraph = null,
   expandable = true,
+  enableGlobalGraph = true,
   global,
   minimizeGraphCallback,
 }): ReactElement<IVaultusaurusGraph> {
@@ -88,7 +90,12 @@ export default function VaultusaurusGraph({
           document.body
         )}
 
-      {!global && <GraphContent expandable={expandable} />}
+      {!global && (
+        <GraphContent
+          expandable={expandable}
+          enableGlobalGraph={enableGlobalGraph}
+        />
+      )}
     </GraphContext.Provider>
   );
 }
