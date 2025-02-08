@@ -7,6 +7,7 @@ import { VaultusaurusPluginOptions } from "../../common/options";
 import {
   AdjacencyMap,
   GraphInfo,
+  GraphInfoMap,
   GraphNodeInfo,
   GraphNodeLinkInfo,
   ObsidianTagsInfo,
@@ -36,6 +37,7 @@ export function buildAndSetGlobalData(
   const globalData: VaultusaurusGlobalData = {
     graphInfo: graphInfoMap,
     graphStyle: options.graphStyle || {},
+    globalGraphInfo: buildGlobalGraph(graphInfoMap),
   };
 
   setGlobalData(globalData);
@@ -243,4 +245,47 @@ function handleTaggedDocuments(
 
     handleLink(currentNode.id, linkedDocumentId, adjacencyMap, links);
   });
+}
+
+function buildGlobalGraph(graphInfoMap: GraphInfoMap): GraphInfo {
+  const nodes: GraphNodeInfo[] = [];
+  const links: GraphNodeLinkInfo[] = [];
+
+  const processedNodes: Set<string> = new Set();
+  const processedLinks: { [key: string]: Set<string> } = {};
+
+  function nodeProcessed(node: GraphNodeInfo): boolean {
+    const processed = processedNodes.has(node.id);
+    if (!processed) {
+      processedNodes.add(node.id);
+    }
+    return processed;
+  }
+
+  function linkProcessed(link: GraphNodeLinkInfo): boolean {
+    if (!processedLinks[link.source]) {
+      processedLinks[link.source] = new Set();
+    }
+    const processed = processedLinks[link.source].has(link.target);
+    if (!processed) {
+      processedLinks[link.source].add(link.target);
+    }
+    return processed;
+  }
+
+  for (const graphInfo of Object.values(graphInfoMap)) {
+    for (const node of graphInfo.nodes) {
+      if (!nodeProcessed(node)) {
+        nodes.push(node);
+      }
+    }
+
+    for (const link of graphInfo.links) {
+      if (!linkProcessed(link)) {
+        links.push(link);
+      }
+    }
+  }
+
+  return { nodes, links };
 }

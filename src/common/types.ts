@@ -45,5 +45,6 @@ export type AdjacencyMap = {
 
 export type VaultusaurusGlobalData = {
   graphInfo: GraphInfoMap;
+  globalGraphInfo: GraphInfo;
   graphStyle: GraphStyle;
 };
