@@ -38,8 +38,8 @@ export default function useGraphManager(rawData: GraphInfo) {
       ObsidianNoteNode,
       ObsidianNoteLink
     >(Object.values(nodes))
-      .alphaDecay(0.03)
-      .velocityDecay(0.07)
+      .alphaDecay(0.05)
+      .velocityDecay(0.1)
       .force(
         "link",
         forceLink<ObsidianNoteNode, ObsidianNoteLink>(links)
