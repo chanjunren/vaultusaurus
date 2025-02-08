@@ -1,6 +1,6 @@
 :root {
-    --vaultusaurus-modal-width: 80%;
-    --vaultusaurus-modal-height: 60%;
+    --vaultusaurus-modal-width: 90%;
+    --vaultusaurus-modal-height: 85%;
     --vaultusaurus-icon-size: 16px;
     --vaultusaurus-blur: blur(7px);
 }
@@ -67,8 +67,6 @@
     top: 50px;
     right: 17px;
 }
-
-
 
 .iconOverlay > svg {
     opacity: 0.5;
