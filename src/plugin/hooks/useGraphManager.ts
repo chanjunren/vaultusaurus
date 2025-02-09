@@ -30,8 +30,8 @@ export default function useGraphManager(
   const [expanded, setExpanded] = useState<boolean>(false);
   const [globalModal, setGlobalModal] = useState<boolean>(false);
 
-  const containerWidth = global ? 1800 : expanded ? 1200 : 280;
-  const containerHeight = expanded || global ? (containerWidth * 9) / 16 : 280;
+  const containerWidth = global ? 1800 : expanded ? 1200 : 370;
+  const containerHeight = expanded || global ? (containerWidth * 9) / 16 : 370;
   const LINK_DISTANCE = expanded ? 20 : 10;
 
   useEffect(() => {
@@ -53,8 +53,8 @@ export default function useGraphManager(
           .strength(0.01) // Softer link strength to reduce rigidity
       )
       .force("center", forceCenter(containerWidth / 2, containerHeight / 2)) // Center the graph
-      .force("charge", forceManyBody().strength(-5)) // Softer repulsion
-      .force("collision", forceCollide().radius(10).strength(0.01)) // Smoother collision
+      .force("charge", forceManyBody().strength(-25)) // Softer repulsion
+      .force("collision", forceCollide().radius(10).strength(0.08)) // Smoother collision
       .on("tick", () => {
         const newNodes = toNodeMap(currentSimulation.nodes());
         setNodes(newNodes);

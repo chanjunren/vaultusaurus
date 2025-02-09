@@ -2,6 +2,7 @@ import { GraphContext } from "@vaultusaurus/plugin/context";
 import styles from "@vaultusaurus/plugin/css/index.module.css";
 import useGraphNode from "@vaultusaurus/plugin/hooks/useGraphNode";
 import { ObsidianNoteNode } from "@vaultusaurus/plugin/types";
+import classNames from "classnames";
 import { useContext } from "react";
 
 type GraphNodeProps = {
@@ -28,7 +29,7 @@ export default function GraphNode({ node }: GraphNodeProps) {
       <a href={node.type === "DOCUMENT" ? node.path : undefined}>
         <circle
           ref={nodeRef}
-          className={styles.graphComponent}
+          className={classNames(styles.graphComponent, styles.node)}
           onMouseEnter={() => setHoveredNode(node)}
           onMouseLeave={() => imBeingHovered && setHoveredNode(null)}
           fill={imBeingHovered ? activeColor : defaultColor}

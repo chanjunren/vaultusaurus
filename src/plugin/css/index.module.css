@@ -72,6 +72,10 @@
     transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 
+.node {
+    z-index: 50;
+}
+
 .iconOverlay > svg {
     opacity: 0.5;
     color: var(--vaultusaurus-default-color);
