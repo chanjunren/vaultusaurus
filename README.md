@@ -5,20 +5,27 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/chanjunren/vaultusaurus/build.yml)
 ![GitHub License](https://img.shields.io/github/license/chanjunren/vaultusaurus)
 
-Tools for integrating a [Obsidian](https://obsidian.md/) Vault with a [Docusaurus](https://docusaurus.io/) website
-
-> [!NOTE]
-> This is a personal project developed for my notes [repository](https://chanjunren.github.io)
->
-> Feel free to use it at your own discretion, and let me know if you have feature suggestions or would like to contribute
+Plugin for integrating a [Obsidian](https://obsidian.md/) Vault with [Docusaurus](https://docusaurus.io/)
 
 ## ✨ Features
-
-- Syntax transformation
+- Converts Obsidian’s custom markdown syntax to Docusaurus-compatible syntax, including:
   - Admonitions ([javalent/admonitions](https://github.com/javalent/admonitions))
   - Internal links
   - Tags
-  - ...
+  - Custom syntax
+
+- Graph view:
+  - Identifying links between notes through internal links tags
+  - Rendering a local 
+  
+
+
+> [!NOTE]
+> This project is primarily built for personal use, and is tailored to my own needs and preferences
+> See in action [here](https://chanjunren.github.io)!
+> 
+> If you use this plugin, I’d love to check out your website!
+
 
 | Obsidian                                                                                                    | Docusaurus (Without plugin)                                                                                                                   | Docusaurus (With plugin)                                                                                                                |
 | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
