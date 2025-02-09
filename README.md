@@ -37,9 +37,8 @@ Plugin for integrating a [Obsidian](https://obsidian.md/) Vault with [Docusaurus
 <img alt="Local graph view" src="https://raw.githubusercontent.com/chanjunren/vaultusaurus/master/assets/vaultusaurus_demo.png" width="200px">
 
 ## 🔗 Links
-
-- [Setup](https://github.com/chanjunren/vaultusaurus/wiki/Setup)
 - [Wiki](https://github.com/chanjunren/vaultusaurus/wiki)
+- [Resources](https://github.com/chanjunren/vaultusaurus/wiki/Resources)
 
 ---
 
