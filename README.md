@@ -22,6 +22,7 @@ Plugin for integrating a [Obsidian](https://obsidian.md/) Vault with [Docusaurus
 
 > [!NOTE]
 > This project is primarily built for personal use, and is tailored to my own needs and preferences
+>
 > See in action [here](https://chanjunren.github.io)!
 > 
 > If you use this plugin, I’d love to check out your website!
@@ -31,7 +32,7 @@ Plugin for integrating a [Obsidian](https://obsidian.md/) Vault with [Docusaurus
 | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | ![obsidian_demo](https://raw.githubusercontent.com/chanjunren/vaultusaurus/master/assets/obsidian_demo.png) | ![docusaurus_without_plugin_demo](https://raw.githubusercontent.com/chanjunren/vaultusaurus/master/assets/docusaurus_without_plugin_demo.png) | ![docusaurus_with_plugin_demo](https://raw.githubusercontent.com/chanjunren/vaultusaurus/master/assets/docusaurus_with_plugin_demo.png) |
 
-- Local graph view
+- Graph view
 
 <img alt="Local graph view" src="https://raw.githubusercontent.com/chanjunren/vaultusaurus/master/assets/vaultusaurus_demo.png" width="200px">
 
