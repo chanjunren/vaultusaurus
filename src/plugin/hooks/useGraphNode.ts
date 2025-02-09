@@ -24,7 +24,7 @@ export default function useGraphNode(
 
   const dragStarted = useCallback((event) => {
     if (!event.active && simulation.current) {
-      simulation.current.alphaTarget(1).restart();
+      simulation.current.alphaTarget(0.1).restart();
     }
     event.subject.fx = event.x;
     event.subject.fy = event.y;
