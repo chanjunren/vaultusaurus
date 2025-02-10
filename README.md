@@ -14,11 +14,9 @@ Plugin for integrating a [Obsidian](https://obsidian.md/) Vault with [Docusaurus
   - Tags
   - Custom syntax
 
-- Graph view:
-  - Identifying links between notes through internal links tags
-  - Rendering a local 
-  
-
+- Rendering Graph View:
+  - Automatically identifies and visualizes links between notes through internal links and tags.
+  - Supports both local graph view (note-specific) and global graph view (site-wide).
 
 > [!NOTE]
 > This project is primarily built for personal use, and is tailored to my own needs and preferences
