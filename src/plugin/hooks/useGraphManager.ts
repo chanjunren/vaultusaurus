@@ -30,8 +30,8 @@ export default function useGraphManager(
   const [expanded, setExpanded] = useState<boolean>(false);
   const [globalModal, setGlobalModal] = useState<boolean>(false);
 
-  const containerWidth = global ? 1800 : expanded ? 1200 : 370;
-  const containerHeight = expanded || global ? (containerWidth * 9) / 16 : 370;
+  const containerWidth = global || expanded ? window.innerWidth * 0.9 : 370;
+  const containerHeight = global || expanded ? window.innerHeight * 0.85 : 370;
   const LINK_DISTANCE = expanded ? 20 : 10;
 
   useEffect(() => {
