@@ -8,7 +8,9 @@
 Plugin for integrating a [Obsidian](https://obsidian.md/) Vault with [Docusaurus](https://docusaurus.io/)
 
 ## ✨ Features
+
 - Converts Obsidian’s custom markdown syntax to Docusaurus-compatible syntax, including:
+
   - Admonitions ([javalent/admonitions](https://github.com/javalent/admonitions))
   - Internal links
   - Tags
@@ -21,10 +23,9 @@ Plugin for integrating a [Obsidian](https://obsidian.md/) Vault with [Docusaurus
 > [!NOTE]
 > This project is primarily built for personal use, and is tailored to my own needs and preferences
 >
-> See in action [here](https://chanjunren.github.io)!
-> 
+> See in action [here](https://chanjunren.github.io/docs/zettelkasten/sentinel)!
+>
 > If you use this plugin, I’d love to check out your website!
-
 
 | Obsidian                                                                                                    | Docusaurus (Without plugin)                                                                                                                   | Docusaurus (With plugin)                                                                                                                |
 | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -35,6 +36,7 @@ Plugin for integrating a [Obsidian](https://obsidian.md/) Vault with [Docusaurus
 <img alt="Local graph view" src="https://raw.githubusercontent.com/chanjunren/vaultusaurus/master/assets/vaultusaurus_demo.png" width="200px">
 
 ## 🔗 Links
+
 - [Wiki](https://github.com/chanjunren/vaultusaurus/wiki)
 - [Resources](https://github.com/chanjunren/vaultusaurus/wiki/Resources)
 
