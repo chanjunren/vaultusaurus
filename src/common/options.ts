@@ -7,4 +7,5 @@ export type GraphStyle = {
 export type VaultusaurusPluginOptions = {
   ignoredGraphTags?: string[];
   graphStyle: GraphStyle;
+  maxDepth?: number;
 };
