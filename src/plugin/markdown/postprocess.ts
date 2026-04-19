@@ -16,6 +16,9 @@ export function buildAndSetGlobalData(
 ) {
   const graphInfoMap: { [filePath: string]: GraphInfo } = {};
   Object.keys(vault.documents).forEach((fileName) => {
+    if (options.notesToIgnore?.has(fileName)) {
+      return;
+    }
     const relativePath = vault.documents[fileName].relativeFilePath;
     graphInfoMap[relativePath] = buildGraphInfo(
       vault,

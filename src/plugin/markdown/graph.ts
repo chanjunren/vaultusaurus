@@ -22,12 +22,11 @@ class GraphBuilder {
   private readonly queue: QueueItem[] = [];
   private readonly nodes: GraphNodeInfo[] = [];
   private readonly links: GraphNodeLinkInfo[] = [];
-  private readonly tagsToIgnore: Set<string>;
-  private readonly maxDepth?: number;
 
-  constructor(seed: GraphNodeInfo, options: VaultusaurusPluginOptions) {
-    this.tagsToIgnore = new Set(options.ignoredGraphTags || []);
-    this.maxDepth = options.maxDepth;
+  constructor(
+    seed: GraphNodeInfo,
+    private readonly options: VaultusaurusPluginOptions
+  ) {
     this.queue.push({ node: seed, distance: 0 });
   }
 
@@ -56,7 +55,8 @@ class GraphBuilder {
   }
 
   canExpand(distance: number): boolean {
-    return this.maxDepth === undefined || distance < this.maxDepth;
+    const { maxDepth } = this.options;
+    return maxDepth === undefined || distance < maxDepth;
   }
 
   enqueue(node: GraphNodeInfo, distance: number): void {
@@ -64,7 +64,11 @@ class GraphBuilder {
   }
 
   isIgnoredTag(tag: string): boolean {
-    return this.tagsToIgnore.has(tag);
+    return this.options.tagsToIgnore?.has(tag) ?? false;
+  }
+
+  isIgnoredNote(name: string): boolean {
+    return this.options.notesToIgnore?.has(name) ?? false;
   }
 
   linkNodes(sourceId: string, targetId: string): void {
@@ -171,6 +175,9 @@ function expandInternalLinks(
   vault: ObsidianVaultInfo
 ): void {
   vault.documents[node.label].relatedDocuments.forEach((relatedDoc) => {
+    if (builder.isIgnoredNote(relatedDoc)) {
+      return;
+    }
     const relatedPath = vault.documents[relatedDoc].relativeFilePath;
     const relatedId = `${OBSIDIAN_FILE_ID_PREFIX}__${relatedPath}`;
     builder.enqueue(
@@ -197,6 +204,9 @@ function expandTaggedDocuments(
     return;
   }
   tags[node.label].linkedDocuments.forEach((linkedDoc) => {
+    if (builder.isIgnoredNote(linkedDoc)) {
+      return;
+    }
     const linkedPath = vault.documents[linkedDoc].relativeFilePath;
     const linkedId = `${OBSIDIAN_FILE_ID_PREFIX}__${linkedPath}`;
     builder.enqueue(

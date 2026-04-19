@@ -5,7 +5,8 @@ export type GraphStyle = {
 };
 
 export type VaultusaurusPluginOptions = {
-  ignoredGraphTags?: string[];
+  tagsToIgnore?: Set<string>;
+  notesToIgnore?: Set<string>;
   graphStyle: GraphStyle;
   maxDepth?: number;
 };
