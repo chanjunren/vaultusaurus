@@ -3,7 +3,9 @@ import { VaultusaurusPluginOptions } from "@vaultusaurus/common/options";
 import path from "path";
 import outputDataForThemeAndRemarkPlugin from "./markdown";
 
-export default async function docusaurusPluginVaultusaurus(
+const SWIZZLE_COMPONENTS = ["VaultusaurusGraph", "GraphLink", "GraphNode"];
+
+async function docusaurusPluginVaultusaurus(
   context: LoadContext,
   opts: PluginOptions
 ): Promise<Plugin> {
@@ -42,3 +44,7 @@ export default async function docusaurusPluginVaultusaurus(
     },
   };
 }
+
+export default Object.assign(docusaurusPluginVaultusaurus, {
+  getSwizzleComponentList: (): string[] => SWIZZLE_COMPONENTS,
+});
