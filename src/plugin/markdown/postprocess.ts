@@ -1,6 +1,6 @@
-import { PluginContentLoadedActions } from "@docusaurus/types";
-import { VaultusaurusPluginOptions } from "../../common/options";
-import {
+import type { PluginContentLoadedActions } from "@docusaurus/types";
+import type { VaultusaurusPluginOptions } from "../../common/options";
+import type {
   GraphInfo,
   ObsidianTagsInfo,
   ObsidianVaultInfo,
@@ -19,7 +19,11 @@ export function buildAndSetGlobalData(
     if (options.notesToIgnore?.has(fileName)) {
       return;
     }
-    const relativePath = vault.documents[fileName].relativeFilePath;
+    const document = vault.documents[fileName];
+    const relativePath = document?.relativeFilePath;
+    if (!relativePath) {
+      return;
+    }
     graphInfoMap[relativePath] = buildGraphInfo(
       vault,
       fileName,

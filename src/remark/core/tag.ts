@@ -1,4 +1,4 @@
-import { Find, Replace } from "mdast-util-find-and-replace";
+import type { Find, Replace } from "mdast-util-find-and-replace";
 import { u } from "unist-builder";
 import { OBSIDIAN_TAG_REGEX } from "../../common/constants";
 

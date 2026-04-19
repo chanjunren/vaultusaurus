@@ -1,4 +1,4 @@
-import { IGraphContext } from "@vaultusaurus/plugin/types";
+import type { IGraphContext } from "@vaultusaurus/plugin/types";
 
 import { createContext } from "react";
 
@@ -11,7 +11,7 @@ export const GraphContext = createContext<IGraphContext>({
   graphManager: {
     nodes: {},
     links: [],
-    simulation: null,
+    simulation: { current: null },
     expanded: false,
     setExpanded: () => {},
     globalModal: false,

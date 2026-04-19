@@ -1,4 +1,4 @@
-import { DocumentInfo } from "@vaultusaurus/common/types";
+import type { DocumentInfo } from "@vaultusaurus/common/types";
 
 export function buildBaseMetadata(): DocumentInfo {
   return {

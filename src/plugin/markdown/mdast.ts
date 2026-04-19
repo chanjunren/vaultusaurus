@@ -1,6 +1,9 @@
 import { fromMarkdown } from "mdast-util-from-markdown";
 import { visit } from "unist-util-visit";
-import { ObsidianTagsInfo, ObsidianVaultInfo } from "../../common/types";
+import type {
+  ObsidianTagsInfo,
+  ObsidianVaultInfo,
+} from "../../common/types";
 import { DocumentIndexer, scanTags, scanWikilinks } from "./indexer";
 
 export function processFile(

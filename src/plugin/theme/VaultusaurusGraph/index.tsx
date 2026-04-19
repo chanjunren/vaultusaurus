@@ -1,5 +1,8 @@
 import { usePluginData } from "@docusaurus/useGlobalData";
-import { GraphInfo, VaultusaurusGlobalData } from "@vaultusaurus/common/types";
+import type {
+  GraphInfo,
+  VaultusaurusGlobalData,
+} from "@vaultusaurus/common/types";
 import { GraphContext } from "@vaultusaurus/plugin/context";
 import styles from "@vaultusaurus/plugin/css/index.module.css";
 import { useGraphManager, useHoverManager } from "@vaultusaurus/plugin/hooks";
@@ -8,7 +11,7 @@ import {
   FALLBACK_BACKGROUND_COLOR,
   FALLBACK_DEFAULT_COLOR,
 } from "@vaultusaurus/plugin/utils";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 import { createPortal } from "react-dom";
 import GraphContent from "./GraphContent";
 
@@ -21,18 +24,18 @@ interface IVaultusaurusGraph {
 }
 
 export default function VaultusaurusGraph({
-  customGraph = null,
+  customGraph,
   expandable = true,
   enableGlobalGraph = true,
-  global,
+  global = false,
   minimizeGraphCallback,
-}): ReactElement<IVaultusaurusGraph> {
+}: IVaultusaurusGraph): ReactElement | null {
   const globalData = usePluginData(
     "docusaurus-plugin-vaultusaurus"
   ) as VaultusaurusGlobalData;
-  const graphInfo: GraphInfo = global
+  const graphInfo: GraphInfo | undefined = global
     ? globalData.globalGraphInfo
-    : globalData.graphInfo[window.location.pathname] || customGraph;
+    : globalData.graphInfo[window.location.pathname] ?? customGraph;
 
   if (!graphInfo) {
     return null;
@@ -59,7 +62,7 @@ export default function VaultusaurusGraph({
         },
       }}
     >
-      {global && (
+      {global && minimizeGraphCallback && (
         <div
           className={styles.modalOverlay}
           onClick={() => minimizeGraphCallback()}

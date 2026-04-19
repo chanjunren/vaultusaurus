@@ -46,6 +46,7 @@ export const ADMONITION_OPTIONS: Set<string> = new Set([
 ]);
 
 export function docusaurusAdmonition(node?: string): string {
+  if (!node) return "info";
   if (TIP_OPTIONS.has(node)) {
     return "tip";
   } else if (NOTE_OPTIONS.has(node)) {

@@ -1,12 +1,15 @@
-import { GraphInfo } from "@vaultusaurus/common/types";
-import { ObsidianNoteLink, ObsidianNoteNode } from "@vaultusaurus/plugin/types";
+import type { GraphInfo } from "@vaultusaurus/common/types";
+import type {
+  ObsidianNoteLink,
+  ObsidianNoteNode,
+} from "@vaultusaurus/plugin/types";
 import {
   forceCenter,
   forceCollide,
   forceLink,
   forceManyBody,
   forceSimulation,
-  Simulation,
+  type Simulation,
 } from "d3-force";
 import { useEffect, useMemo, useRef, useState } from "react";
 export default function useGraphManager(
@@ -24,8 +27,10 @@ export default function useGraphManager(
     prepareNewLinks(graphData, nodes)
   );
 
-  const simulation =
-    useRef<Simulation<ObsidianNoteNode, ObsidianNoteLink>>(null);
+  const simulation = useRef<Simulation<
+    ObsidianNoteNode,
+    ObsidianNoteLink
+  > | null>(null);
 
   const [expanded, setExpanded] = useState<boolean>(false);
   const [globalModal, setGlobalModal] = useState<boolean>(false);
@@ -98,8 +103,10 @@ export default function useGraphManager(
   };
 }
 
-function toNodeMap(nodes: ObsidianNoteNode[]) {
-  const res = {};
+function toNodeMap(
+  nodes: ObsidianNoteNode[]
+): Record<string, ObsidianNoteNode> {
+  const res: Record<string, ObsidianNoteNode> = {};
   nodes?.forEach((node) => (res[node.id] = node));
   return res;
 }

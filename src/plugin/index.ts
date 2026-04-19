@@ -1,5 +1,9 @@
-import { LoadContext, Plugin, PluginOptions } from "@docusaurus/types";
-import { VaultusaurusPluginOptions } from "@vaultusaurus/common/options";
+import type {
+  LoadContext,
+  Plugin,
+  PluginOptions,
+} from "@docusaurus/types";
+import type { VaultusaurusPluginOptions } from "@vaultusaurus/common/options";
 import path from "path";
 import outputDataForThemeAndRemarkPlugin from "./markdown";
 

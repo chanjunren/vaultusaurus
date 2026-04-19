@@ -2,8 +2,8 @@ import {
   OBSIDIAN_FILE_ID_PREFIX,
   OBSIDIAN_TAG_ID_PREFIX,
 } from "../../common/constants";
-import { VaultusaurusPluginOptions } from "../../common/options";
-import {
+import type { VaultusaurusPluginOptions } from "../../common/options";
+import type {
   AdjacencyMap,
   GraphInfo,
   GraphInfoMap,

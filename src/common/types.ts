@@ -1,4 +1,4 @@
-import { GraphStyle } from "./options";
+import type { GraphStyle } from "./options";
 
 export type ObsidianTagInfo = {
   linkedDocuments: string[];

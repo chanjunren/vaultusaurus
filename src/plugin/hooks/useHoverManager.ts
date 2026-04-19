@@ -1,9 +1,12 @@
-import { AdjacencyMap, GraphNodeLinkInfo } from "@vaultusaurus/common/types";
-import { ObsidianNoteNode } from "@vaultusaurus/plugin/types";
+import type {
+  AdjacencyMap,
+  GraphNodeLinkInfo,
+} from "@vaultusaurus/common/types";
+import type { ObsidianNoteNode } from "@vaultusaurus/plugin/types";
 import { useEffect, useState } from "react";
 
 export default function useHover(links: GraphNodeLinkInfo[]) {
-  const [hoveredNode, setHoveredNode] = useState<ObsidianNoteNode>(null);
+  const [hoveredNode, setHoveredNode] = useState<ObsidianNoteNode | null>(null);
   const [adjacencyMap, setAdjacencyMap] = useState<AdjacencyMap>({});
 
   useEffect(() => {
@@ -11,7 +14,7 @@ export default function useHover(links: GraphNodeLinkInfo[]) {
       return;
     }
 
-    const newMap = {};
+    const newMap: AdjacencyMap = {};
     links.forEach((link) => {
       if (!newMap[link.source]) {
         newMap[link.source] = new Set();
@@ -19,8 +22,8 @@ export default function useHover(links: GraphNodeLinkInfo[]) {
       if (!newMap[link.target]) {
         newMap[link.target] = new Set();
       }
-      newMap[link.source].add(link.target);
-      newMap[link.target].add(link.source);
+      newMap[link.source]!.add(link.target);
+      newMap[link.target]!.add(link.source);
     });
 
     setAdjacencyMap(newMap);

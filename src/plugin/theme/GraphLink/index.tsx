@@ -1,6 +1,9 @@
 import { GraphContext } from "@vaultusaurus/plugin/context";
 import styles from "@vaultusaurus/plugin/css/index.module.css";
-import { ObsidianNoteLink, ObsidianNoteNode } from "@vaultusaurus/plugin/types";
+import type {
+  ObsidianNoteLink,
+  ObsidianNoteNode,
+} from "@vaultusaurus/plugin/types";
 import { useContext } from "react";
 
 type GraphLinkProps = {

@@ -2,7 +2,10 @@ import {
   OBSIDIAN_INTERNAL_LINK_REGEX,
   OBSIDIAN_TAG_REGEX,
 } from "../../common/constants";
-import { ObsidianTagsInfo, ObsidianVaultInfo } from "../../common/types";
+import type {
+  ObsidianTagsInfo,
+  ObsidianVaultInfo,
+} from "../../common/types";
 import { buildBaseMetadata } from "./utils";
 
 export class DocumentIndexer {

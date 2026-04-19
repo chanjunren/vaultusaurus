@@ -1,7 +1,7 @@
-import { Nodes } from "mdast";
+import type { Nodes } from "mdast";
 import { findAndReplace } from "mdast-util-find-and-replace";
 
-import { RemarkVaultusaurusOptions } from "@vaultusaurus/remark/options";
+import type { RemarkVaultusaurusOptions } from "@vaultusaurus/remark/options";
 import fs from "fs";
 import path from "path";
 import { map } from "unist-util-map";
@@ -9,7 +9,7 @@ import {
   REMARK_VAULTUSAURUS_INPUT,
   VAULTUSAURUS_PLUGIN_FILES_PREFIX,
 } from "../common/constants";
-import { ObsidianVaultInfo } from "../common/types";
+import type { ObsidianVaultInfo } from "../common/types";
 import {
   admonitionMapper,
   imageReplacer,
@@ -21,7 +21,7 @@ export default function convertToDocusaurusMdx(
   options: RemarkVaultusaurusOptions
 ) {
   const metadataPath = path.join(
-    process.env.PWD,
+    process.env.PWD ?? process.cwd(),
     `${VAULTUSAURUS_PLUGIN_FILES_PREFIX}/${REMARK_VAULTUSAURUS_INPUT}`
   );
   const metadata = retrieveMetadata();

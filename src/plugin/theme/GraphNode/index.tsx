@@ -1,7 +1,7 @@
 import { GraphContext } from "@vaultusaurus/plugin/context";
 import styles from "@vaultusaurus/plugin/css/index.module.css";
 import useGraphNode from "@vaultusaurus/plugin/hooks/useGraphNode";
-import { ObsidianNoteNode } from "@vaultusaurus/plugin/types";
+import type { ObsidianNoteNode } from "@vaultusaurus/plugin/types";
 import classNames from "classnames";
 import { useContext } from "react";
 
@@ -31,7 +31,9 @@ export default function GraphNode({ node }: GraphNodeProps) {
           ref={nodeRef}
           className={classNames(styles.graphComponent, styles.node)}
           onMouseEnter={() => setHoveredNode(node)}
-          onMouseLeave={() => imBeingHovered && setHoveredNode(null)}
+          onMouseLeave={() => {
+            if (imBeingHovered) setHoveredNode(null);
+          }}
           fill={imBeingHovered ? activeColor : defaultColor}
           stroke={imBeingHovered ? activeColor : defaultColor}
           opacity={otherNodeIsHovered && !focused ? 0.1 : 1}

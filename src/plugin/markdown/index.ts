@@ -1,10 +1,16 @@
-import { LoadContext, PluginContentLoadedActions } from "@docusaurus/types";
-import { VaultusaurusPluginOptions } from "@vaultusaurus/common/options";
+import type {
+  LoadContext,
+  PluginContentLoadedActions,
+} from "@docusaurus/types";
+import type { VaultusaurusPluginOptions } from "@vaultusaurus/common/options";
 import { readFileSync } from "fs";
 import { globStreamSync } from "glob";
 import path from "path";
 import { REMARK_VAULTUSAURUS_INPUT } from "../../common/constants";
-import { ObsidianTagsInfo, ObsidianVaultInfo } from "../../common/types";
+import type {
+  ObsidianTagsInfo,
+  ObsidianVaultInfo,
+} from "../../common/types";
 import { processFile } from "./mdast";
 import { buildAndSetGlobalData } from "./postprocess";
 import { buildBaseMetadata } from "./utils";

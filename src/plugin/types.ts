@@ -1,6 +1,6 @@
-import { GraphStyle } from "@vaultusaurus/common/options";
-import { GraphNodeInfo } from "@vaultusaurus/common/types";
-import { SimulationLinkDatum, SimulationNodeDatum } from "d3-force";
+import type { GraphStyle } from "@vaultusaurus/common/options";
+import type { GraphNodeInfo } from "@vaultusaurus/common/types";
+import type { SimulationLinkDatum, SimulationNodeDatum } from "d3-force";
 import { useGraphManager, useHoverManager } from "./hooks";
 
 export type ObsidianNoteNode = SimulationNodeDatum & GraphNodeInfo;

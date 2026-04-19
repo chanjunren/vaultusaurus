@@ -1,7 +1,12 @@
-import { IGraphContext, ObsidianNoteNode } from "@vaultusaurus/plugin/types";
-import { drag } from "d3-drag";
+import type {
+  IGraphContext,
+  ObsidianNoteNode,
+} from "@vaultusaurus/plugin/types";
+import { drag, type D3DragEvent } from "d3-drag";
 import { select } from "d3-selection";
 import { useCallback, useEffect, useRef } from "react";
+
+type NodeDragEvent = D3DragEvent<SVGCircleElement, ObsidianNoteNode, ObsidianNoteNode>;
 
 export default function useGraphNode(
   context: IGraphContext,
@@ -11,18 +16,18 @@ export default function useGraphNode(
   const { hoveredNode, adjacencyMap } = hoverManager;
   const { simulation } = graphManager;
 
-  const nodeRef = useRef(null);
+  const nodeRef = useRef<SVGCircleElement | null>(null);
 
   const imBeingHovered = hoveredNode?.id === node.id;
   const otherNodeIsHovered = !!hoveredNode?.id;
   const imTheNeighborOfTheOneBeingHovered =
     !imBeingHovered &&
-    hoveredNode?.id &&
-    adjacencyMap[hoveredNode.id]?.has(node.id);
+    !!hoveredNode?.id &&
+    !!adjacencyMap[hoveredNode.id]?.has(node.id);
 
   const focused = imBeingHovered || imTheNeighborOfTheOneBeingHovered;
 
-  const dragStarted = useCallback((event) => {
+  const dragStarted = useCallback((event: NodeDragEvent) => {
     if (!event.active && simulation.current) {
       simulation.current.alphaTarget(0.1).restart();
     }
@@ -30,23 +35,25 @@ export default function useGraphNode(
     event.subject.fy = event.y;
   }, []);
 
-  const dragged = useCallback((event) => {
+  const dragged = useCallback((event: NodeDragEvent) => {
     event.subject.fx = event.x;
     event.subject.fy = event.y;
   }, []);
 
-  const dragEnded = useCallback((event) => {
+  const dragEnded = useCallback((event: NodeDragEvent) => {
     event.subject.fx = null;
     event.subject.fy = null;
   }, []);
 
   useEffect(() => {
-    const currentNode = nodeRef.current ? select(nodeRef.current) : undefined;
+    const currentNode = nodeRef.current
+      ? select<SVGCircleElement, ObsidianNoteNode>(nodeRef.current)
+      : undefined;
 
     if (currentNode) {
       currentNode.datum(node);
 
-      const dragBehavior = drag()
+      const dragBehavior = drag<SVGCircleElement, ObsidianNoteNode>()
         .on("start", dragStarted)
         .on("drag", dragged)
         .on("end", dragEnded);

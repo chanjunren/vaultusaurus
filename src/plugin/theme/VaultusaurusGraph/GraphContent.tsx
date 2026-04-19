@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useRef } from "react";
+import { useContext, useRef, type ReactElement } from "react";
 
 import { GraphContext } from "@vaultusaurus/plugin/context";
 import styles from "@vaultusaurus/plugin/css/index.module.css";
@@ -40,7 +40,7 @@ export default function GraphContent({
     "--vaultusaurus-active-color": graphStyle.defaultColor,
   } as React.CSSProperties;
 
-  const container = useRef(null);
+  const container = useRef<SVGSVGElement | null>(null);
   const { transform } = useZoom(container);
 
   return (
